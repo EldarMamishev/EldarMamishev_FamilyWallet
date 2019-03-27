@@ -13,5 +13,6 @@ namespace Domain.Entity
         public virtual OperationCategory OperationCategory { get; set; }
         public int? OperationInfoID { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Domain.Entity
         public virtual Person Person { get; set; }
         public int? WalletID { get; set; }
         public virtual Wallet Wallet { get; set; }
-        public ScopeEnum scope { get; set; }
+        public AccessModifier Scope { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
     }
 }

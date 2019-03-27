@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Domain.Enum
 {
-    public enum ScopeEnum
+    public enum OperationType
     {
-        View = 1, 
-        Manage = 2
+        Earning = 0,
+        Spending = 1
     }
 }

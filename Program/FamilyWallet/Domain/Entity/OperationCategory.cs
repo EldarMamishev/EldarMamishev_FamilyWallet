@@ -9,7 +9,7 @@ namespace Domain.Entity
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public OperationTypeEnum Type { get; set; }
+        public OperationType Type { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
     }
 }
