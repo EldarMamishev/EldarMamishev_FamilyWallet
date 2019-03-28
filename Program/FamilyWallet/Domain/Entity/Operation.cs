@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class Operation
+    public class Operation: EntityBase
     {
-        public int ID { get; set; }
         public int? PersonWalletID { get; set; }
         public virtual PersonWallet PersonWallet { get; set; }
         public int? OperationCategoryId { get; set; }

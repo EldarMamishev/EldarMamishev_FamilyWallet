@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class PersonFamily
+    public class PersonFamily: EntityBase
     {
-        public int ID { get; set; }
         public int? PersonID { get; set; }
         public virtual Person Person { get; set; }
         public int? FamilyID { get; set; }

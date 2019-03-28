@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class Wallet
+    public class Wallet: EntityBase
     {
-        public int ID { get; set; }
         public int? FamilyID { get; set; }
         public virtual Family Family { get; set; }
         public string Name { get; set; }

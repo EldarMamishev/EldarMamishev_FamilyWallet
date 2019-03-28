@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class Person
+    public class Person: EntityBase
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public virtual ICollection<PersonWallet> PersonWallets { get; set; }
