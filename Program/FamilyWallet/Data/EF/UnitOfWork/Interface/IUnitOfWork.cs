@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Domain.Repository;
+
+namespace Data.EF.UnitOfWork.Interface
+{
+    public interface IUnitOfWork
+    {
+        IFamilyRepository FamilyRepository { get; }
+        IOperationCategoryRepository OperationCategoryRepository { get; }
+        IOperationInfoRepository OperationInfoRepository { get; }
+        IOperationRepository OperationRepository { get; }
+        IPersonFamilyRepository PersonFamilyRepository { get; }
+        IPersonRepository PersonRepository { get; }
+        IPersonWalletRepository PersonWalletRepository { get; }
+        ITransactionRepository TransactionRepository { get; }
+        IWalletRepository WalletRepository { get; }
+    }
+}
