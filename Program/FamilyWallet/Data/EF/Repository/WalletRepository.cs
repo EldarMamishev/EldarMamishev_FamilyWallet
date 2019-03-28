@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Data.EF.Repository.Base;
 using Domain.Entity;
 using Domain.Enum;
@@ -15,18 +14,12 @@ namespace Data.EF.Repository
         { }
 
         public ICollection<Wallet> GetWalletsByFamilyId(int familyId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Wallet>().Where(w => w.FamilyID.Value == familyId).ToList();
 
         public ICollection<Wallet> GetWalletsByPersonId(int personId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Wallet>().Where(w => w.PersonWallets.Any(pw => pw.PersonID.Value == personId)).ToList();
 
         public ICollection<Wallet> GetWalletsByType(WalletType type)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Wallet>().Where(w => w.Type == type).ToList();
     }
 }

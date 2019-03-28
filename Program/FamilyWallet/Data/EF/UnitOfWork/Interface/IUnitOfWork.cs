@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain.Repository;
+﻿using Domain.Repository;
 
 namespace Data.EF.UnitOfWork.Interface
 {

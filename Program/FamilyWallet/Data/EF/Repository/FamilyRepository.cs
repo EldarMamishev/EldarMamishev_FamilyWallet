@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Data.EF.Repository.Base;
 using Domain.Entity;
 using Domain.Repository;
@@ -14,8 +13,6 @@ namespace Data.EF.Repository
         { }
 
         public ICollection<Family> GetFamiliesByPersonId(int personId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Family>().Where(f => f.PersonFamilies.Any(pf => pf.PersonID.Value == personId)).ToList();
     }
 }
