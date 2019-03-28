@@ -6,7 +6,7 @@ using Domain.Enum;
 
 namespace Domain.Entity
 {
-    public class Wallet: EntityBase
+    public class Wallet : EntityBase
     {
         public int? FamilyID { get; set; }
         public virtual Family Family { get; set; }

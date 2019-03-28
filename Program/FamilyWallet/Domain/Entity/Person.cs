@@ -5,7 +5,7 @@ using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class Person: EntityBase
+    public class Person : EntityBase
     {
         public string Name { get; set; }
         public string Surname { get; set; }

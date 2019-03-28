@@ -6,7 +6,7 @@ using Domain.Enum;
 
 namespace Domain.Entity
 {
-    public class PersonWallet: EntityBase
+    public class PersonWallet : EntityBase
     {
         public int? PersonID { get; set; }
         public virtual Person Person { get; set; }

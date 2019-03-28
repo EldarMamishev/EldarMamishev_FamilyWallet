@@ -5,7 +5,7 @@ using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class Operation: EntityBase
+    public class Operation : EntityBase
     {
         public int? PersonWalletID { get; set; }
         public virtual PersonWallet PersonWallet { get; set; }

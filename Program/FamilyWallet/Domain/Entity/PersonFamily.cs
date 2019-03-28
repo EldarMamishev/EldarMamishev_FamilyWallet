@@ -5,7 +5,7 @@ using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class PersonFamily: EntityBase
+    public class PersonFamily : EntityBase
     {
         public int? PersonID { get; set; }
         public virtual Person Person { get; set; }

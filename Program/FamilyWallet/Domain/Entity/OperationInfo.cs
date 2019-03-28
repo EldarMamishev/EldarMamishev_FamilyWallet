@@ -5,7 +5,7 @@ using Domain.Entity.Base;
 
 namespace Domain.Entity
 {
-    public class OperationInfo: EntityBase
+    public class OperationInfo : EntityBase
     {
         public decimal Balance { get; set; }
         public DateTime Date { get; set; }
