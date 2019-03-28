@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Data.EF.Repository.Base;
 using Domain.Entity;
 using Domain.Repository;
@@ -13,18 +13,12 @@ namespace Data.EF.Repository
         { }
 
         public ICollection<Operation> GetOperationsByPersonId(int personId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Operation>().Where(o => o.PersonWallet.PersonID.Value == personId).ToList();
 
         public ICollection<Operation> GetOperationsByTransactionId(int transactionId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Operation>().Where(o => o.TransactionID.Value == transactionId).ToList();
 
         public ICollection<Operation> GetOperationsByWalletId(int walletId)
-        {
-            throw new NotImplementedException();
-        }
+            => this.dbContext.Set<Operation>().Where(o => o.PersonWallet.WalletID.Value == walletId).ToList();
     }
 }

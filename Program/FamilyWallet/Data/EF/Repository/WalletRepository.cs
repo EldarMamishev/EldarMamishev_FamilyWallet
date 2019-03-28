@@ -14,12 +14,12 @@ namespace Data.EF.Repository
         { }
 
         public ICollection<Wallet> GetWalletsByFamilyId(int familyId)
-            => dbContext.Set<Wallet>().Where(w => w.FamilyID.Equals(familyId)).ToList();
+            => this.dbContext.Set<Wallet>().Where(w => w.FamilyID.Value == familyId).ToList();
 
         public ICollection<Wallet> GetWalletsByPersonId(int personId)
-            => dbContext.Set<Wallet>().Where(w => w.PersonWallets.Any(pw => pw.PersonID.Equals(personId))).ToList();
+            => this.dbContext.Set<Wallet>().Where(w => w.PersonWallets.Any(pw => pw.PersonID.Value == personId)).ToList();
 
         public ICollection<Wallet> GetWalletsByType(WalletType type)
-            => dbContext.Set<Wallet>().Where(w => w.Type.Equals(type)).ToList();
+            => this.dbContext.Set<Wallet>().Where(w => w.Type == type).ToList();
     }
 }

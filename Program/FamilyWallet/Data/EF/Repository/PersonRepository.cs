@@ -13,9 +13,9 @@ namespace Data.EF.Repository
         { }
 
         public ICollection<Person> GetPeopleByFamilyId(int familyId)
-            => dbContext.Set<Person>().Where(p => p.PersonFamilies.Any(pf => pf.FamilyID.Equals(familyId))).ToList();
+            => this.dbContext.Set<Person>().Where(p => p.PersonFamilies.Any(pf => pf.FamilyID.Value == familyId)).ToList();
 
         public ICollection<Person> GetPeopleByWalletId(int walletId)
-            => dbContext.Set<Person>().Where(p => p.PersonWallets.Any(pw => pw.WalletID.Equals(walletId))).ToList();
+            => this.dbContext.Set<Person>().Where(p => p.PersonWallets.Any(pw => pw.WalletID.Value == walletId)).ToList();
     }
 }
