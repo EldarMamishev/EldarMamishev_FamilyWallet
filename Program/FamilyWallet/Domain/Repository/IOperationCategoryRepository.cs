@@ -8,6 +8,5 @@ namespace Domain.Repository
 {
     public interface IOperationCategoryRepository : IEntityRepository<OperationCategory>
     {
-
     }
 }
