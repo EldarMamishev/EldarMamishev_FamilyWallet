@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Domain.Enum
 {
-    public enum AccessModifier
+    public enum WalletType
     {
-        View = 0, 
-        Manage = 1
+        Cash = 0,
+        DebitCard = 1,
+        PayPal = 2
     }
 }
