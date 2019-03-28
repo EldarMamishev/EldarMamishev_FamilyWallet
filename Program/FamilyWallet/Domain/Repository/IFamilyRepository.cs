@@ -8,6 +8,6 @@ namespace Domain.Repository
 {
     public interface IFamilyRepository : IEntityRepository<Family>
     {
-
+        ICollection<Family> GetFamiliesByPersonId(int personId);
     }
 }
