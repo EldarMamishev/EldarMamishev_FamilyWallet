@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 using Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.EF
 {
