@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Entity.Base
+﻿namespace Domain.Entity.Base
 {
     public abstract class EntityBase
     {
