@@ -6,7 +6,7 @@ using Domain.Repository.Base;
 
 namespace Domain.Repository
 {
-    public interface IOperationRepository: IGenericRepository<Operation>
+    public interface IOperationRepository : IEntityRepository<Operation>
     {
 
     }

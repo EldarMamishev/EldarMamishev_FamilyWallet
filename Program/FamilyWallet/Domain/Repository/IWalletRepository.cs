@@ -6,7 +6,7 @@ using Domain.Repository.Base;
 
 namespace Domain.Repository
 {
-    public interface IWalletRepository: IGenericRepository<Wallet>
+    public interface IWalletRepository : IEntityRepository<Wallet>
     {
 
     }

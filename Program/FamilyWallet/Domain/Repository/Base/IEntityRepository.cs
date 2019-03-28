@@ -5,7 +5,7 @@ using Domain.Entity.Base;
 
 namespace Domain.Repository.Base
 {
-    public interface IGenericRepository<TEntity> where TEntity: EntityBase
+    public interface IEntityRepository<TEntity> where TEntity : EntityBase
     {
         TEntity GetById(int Id);
         IEnumerable<TEntity> GetAll();
