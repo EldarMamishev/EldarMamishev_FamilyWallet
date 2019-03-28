@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entity;
+using Domain.Repository.Base;
 
 namespace Domain.Repository
 {
-    interface IWalletRepository
+    public interface IWalletRepository: IGenericRepository<Wallet>
     {
+
     }
 }
