@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Data.EF.FluentAPIConfig;
+using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.EF
@@ -10,6 +11,13 @@ namespace Data.EF
 
         public FamilyWalletContext(DbContextOptions options) : base(options)
         { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            new ModelConfigurationHandler().SetConfigurations(modelBuilder);
+        }
 
         public DbSet<Family> Families { get; }
         public DbSet<Operation> Operations { get; }

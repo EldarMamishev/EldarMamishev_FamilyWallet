@@ -6,7 +6,7 @@ namespace Domain.Entity
     {
         public int? PersonWalletID { get; set; }
         public virtual PersonWallet PersonWallet { get; set; }
-        public int? OperationCategoryId { get; set; }
+        public int? OperationCategoryID { get; set; }
         public virtual OperationCategory OperationCategory { get; set; }
         public int? OperationInfoID { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
