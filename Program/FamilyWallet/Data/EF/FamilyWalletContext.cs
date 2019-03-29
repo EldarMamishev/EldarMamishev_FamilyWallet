@@ -11,6 +11,11 @@ namespace Data.EF
         public FamilyWalletContext(DbContextOptions options) : base(options)
         { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+
         public DbSet<Family> Families { get; }
         public DbSet<Operation> Operations { get; }
         public DbSet<OperationCategory> OperationCategories { get; }
