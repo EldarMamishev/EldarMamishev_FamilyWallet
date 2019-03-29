@@ -21,7 +21,8 @@ namespace Data.EF.FluentAPIConfig.Entity
 
             builder.HasMany(f => f.Wallets)
                 .WithOne(w => w.Family)
-                .HasForeignKey(w => w.FamilyID);
+                .HasForeignKey(w => w.FamilyID)
+                .IsRequired(false);
         }
     }
 }

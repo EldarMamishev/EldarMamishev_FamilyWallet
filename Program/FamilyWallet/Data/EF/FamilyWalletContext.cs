@@ -13,7 +13,6 @@ namespace Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
         }
 
         public DbSet<Family> Families { get; }

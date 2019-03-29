@@ -11,8 +11,9 @@ namespace Data.EF.FluentAPIConfig.Entity.Base
         where TEntity : EntityBase
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
-        {
-            builder.HasKey(e => e.ID);
+        {            
+            builder.ToTable(typeof(TEntity).Name);
+            builder.HasKey(e => e.ID);            
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Data.EF.FluentAPIConfig.Entity
 
             builder.HasOne(o => o.Transaction)
                 .WithMany(t => t.Operations)
-                .HasForeignKey(o => o.TransactionID);
+                .HasForeignKey(o => o.TransactionID)
+                .IsRequired(false);
 
             builder.HasOne(o => o.OperationInfo)
                 .WithMany(oi => oi.Operations)
@@ -24,7 +25,8 @@ namespace Data.EF.FluentAPIConfig.Entity
 
             builder.HasOne(o => o.OperationCategory)
                 .WithMany(oc => oc.Operations)
-                .HasForeignKey(o => o.OperationCategoryID);
+                .HasForeignKey(o => o.OperationCategoryID)
+                .IsRequired(true);
 
             builder.HasOne(o => o.PersonWallet)
                 .WithMany(pw => pw.Operations)
