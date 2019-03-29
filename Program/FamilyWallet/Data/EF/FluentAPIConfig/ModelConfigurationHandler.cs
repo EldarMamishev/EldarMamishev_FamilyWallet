@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Data.EF.FluentAPIConfig.Entity;
+﻿using Data.EF.FluentAPIConfig.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.EF.FluentAPIConfig

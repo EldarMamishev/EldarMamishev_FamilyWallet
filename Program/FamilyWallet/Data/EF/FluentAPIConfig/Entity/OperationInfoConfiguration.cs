@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Data.EF.FluentAPIConfig.Entity.Base;
+﻿using Data.EF.FluentAPIConfig.Entity.Base;
 using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
