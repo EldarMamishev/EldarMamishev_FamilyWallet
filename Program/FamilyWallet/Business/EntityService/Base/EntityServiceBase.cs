@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.EntityService.Interface;
+using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
 using Domain.Repository.Base;
 
 namespace Business.EntityService.Base
 {
-    public class EntityServiceBase<TEntity> : IEntityService<TEntity>
+    public abstract class EntityServiceBase<TEntity> : IEntityService<TEntity>
         where TEntity : EntityBase
     {
-        protected IEntityRepository<TEntity> entityRepository;
 
-        public IEntityRepository<TEntity> EntityRepository => this.entityRepository;
+        public abstract void Delete(int id);
 
-        public EntityServiceBase(IEntityRepository<TEntity> repository)
+        protected void Delete(int id, IEntityRepository<TEntity> entityRepository) => entityRepository.Delete(entityRepository.GetById(id));
+
+        public EntityServiceBase(IUnitOfWork unitOfWork)
         {
-            this.entityRepository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
-        public ICollection<TEntity> GetAll() => this.EntityRepository.GetAll();
+        public abstract ICollection<TEntity> GetAll();
 
-        public TEntity GetById(int id) => this.EntityRepository.GetById(id);
+        protected ICollection<TEntity> GetAll(IEntityRepository<TEntity> entityRepository) => entityRepository.GetAll();
+
+        protected TEntity GetById(int id, IEntityRepository<TEntity> entityRepository) => entityRepository.GetById(id);
+
+        public abstract TEntity GetById(int id);
+
+        protected IUnitOfWork unitOfWork;
+
+        public IUnitOfWork UnitOfWork => this.unitOfWork;
     }
 }
