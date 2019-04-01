@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.EntityService.Base;
+using Business.EntityService.Interface;
 using Business.Validation.EntityValidation.Interface;
 using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
@@ -9,7 +10,7 @@ using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
-    public class PersonService : EntityServiceBase<Person>
+    public class PersonService : EntityServiceBase<Person>, IPersonService
     {
         public void Create(string name, string surname)
         {

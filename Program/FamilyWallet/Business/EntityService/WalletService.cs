@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.EntityService.Base;
+using Business.EntityService.Interface;
 using Business.Exceptions;
 using Business.Validation.EntityValidation.Interface;
 using Business.Validation.Interface;
@@ -11,7 +12,7 @@ using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
-    public class WalletService : EntityServiceBase<Wallet>
+    public class WalletService : EntityServiceBase<Wallet>, IWalletService
     {
         public void AddUserToWallet(int id, int personId, int familyId, AccessModifier accessModifier)
         {

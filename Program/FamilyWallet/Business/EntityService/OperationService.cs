@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.EntityService.Base;
+using Business.EntityService.Interface;
 using Business.Exceptions;
 using Business.Validation.EntityValidation.Interface;
 using Business.Validation.Interface;
@@ -11,7 +12,7 @@ using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
-    public class OperationService : EntityServiceBase<Operation>
+    public class OperationService : EntityServiceBase<Operation>, IOperationService
     {
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
