@@ -19,13 +19,11 @@ namespace Data.EF.Repository.Base
         public void Add(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Add(entity);
-            this.dbContext.SaveChanges();
         }
 
         public void Delete(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Remove(entity);
-            this.dbContext.SaveChanges();
         }
 
         public ICollection<TEntity> GetAll() => this.dbContext.Set<TEntity>().ToList();
@@ -35,7 +33,6 @@ namespace Data.EF.Repository.Base
         public void Update(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Update(entity);
-            this.dbContext.SaveChanges();
         }
     }
 }

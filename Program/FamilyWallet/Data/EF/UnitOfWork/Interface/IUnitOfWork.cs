@@ -11,6 +11,7 @@ namespace Data.EF.UnitOfWork.Interface
         IPersonFamilyRepository PersonFamilyRepository { get; }
         IPersonRepository PersonRepository { get; }
         IPersonWalletRepository PersonWalletRepository { get; }
+        void SaveChanges();
         ITransactionRepository TransactionRepository { get; }
         IWalletRepository WalletRepository { get; }
     }
