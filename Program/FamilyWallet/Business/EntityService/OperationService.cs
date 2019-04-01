@@ -5,28 +5,15 @@ using Business.Exceptions;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
+using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>
     {
-        public void Delete(int id)
+        public void CreateOneWalletOperation(int personId, int walletId, int balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
-            throw new NotImplementedException();
-        }
-
-        public override ICollection<Operation> GetAll()
-            => this.GetAll(this.UnitOfWork.OperationRepository);
-
-        public override Operation GetById(int id)
-            => this.GetById(id, this.UnitOfWork.OperationRepository);
-
-        public OperationService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        { }
-
-        public void CreateOneWalletOperation(int userId, int walletId, int balance, string description, string operationName, OperationType operationType, DateTime? date)
-        {
-            Person person = this.UnitOfWork.PersonRepository.GetById(userId)
+            Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(walletId)
@@ -35,7 +22,7 @@ namespace Business.EntityService
             if (balance <= 0)
                 throw new InvalidPropertyException(nameof(balance));
 
-            PersonWallet personWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(userId, walletId)
+            PersonWallet personWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(personId, walletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory operationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(operationType, operationName);
@@ -54,12 +41,12 @@ namespace Business.EntityService
             this.UnitOfWork.OperationRepository.Add(operation);
         }
 
-        public void CreateTransaction(int fromUserId, int fromWalletId, int toUserId, int toWalletId, int balance, string description, DateTime? date)
+        public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, int balance, string description, DateTime? date)
         {
-            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(fromUserId)
+            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(frompersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
-            Person toPerson = this.UnitOfWork.PersonRepository.GetById(toUserId)
+            Person toPerson = this.UnitOfWork.PersonRepository.GetById(topersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
             Wallet fromWallet = this.UnitOfWork.WalletRepository.GetById(fromWalletId)
@@ -71,10 +58,10 @@ namespace Business.EntityService
             if (balance <= 0)
                 throw new InvalidPropertyException(nameof(balance));
 
-            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(fromUserId, fromWalletId)
+            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(frompersonId, fromWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
-            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(toUserId, toWalletId)
+            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(topersonId, toWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory fromOperationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(OperationType.Spending, typeof(Transaction).Name);
@@ -121,5 +108,16 @@ namespace Business.EntityService
 
             this.UnitOfWork.WalletRepository.Update(wallet);
         }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override IEntityRepository<Operation> GetRepository()
+            => this.UnitOfWork.OperationRepository;
+
+        public OperationService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        { }
     }
 }

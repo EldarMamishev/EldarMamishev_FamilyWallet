@@ -9,6 +9,5 @@ namespace Business.EntityService.Interface
     {
         ICollection<TEntity> GetAll();
         TEntity GetById(int id);
-        IUnitOfWork UnitOfWork { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Business.EntityService.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
@@ -11,19 +12,18 @@ namespace Business.EntityService.Base
     {
         public EntityServiceBase(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork 
+                ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public abstract ICollection<TEntity> GetAll();
+        public ICollection<TEntity> GetAll() => this.GetRepository().GetAll();
 
-        protected ICollection<TEntity> GetAll(IEntityRepository<TEntity> entityRepository) => entityRepository.GetAll();
+        public TEntity GetById(int id) => this.GetRepository().GetById(id);
 
-        protected TEntity GetById(int id, IEntityRepository<TEntity> entityRepository) => entityRepository.GetById(id);
+        protected abstract IEntityRepository<TEntity> GetRepository();
 
-        public abstract TEntity GetById(int id);
+        private IUnitOfWork unitOfWork;
 
-        protected IUnitOfWork unitOfWork;
-
-        public IUnitOfWork UnitOfWork => this.unitOfWork;
+        protected IUnitOfWork UnitOfWork => this.unitOfWork;
     }
 }

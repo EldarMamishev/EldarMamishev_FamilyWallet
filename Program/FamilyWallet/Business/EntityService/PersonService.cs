@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Business.EntityService.Base;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
+using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
@@ -18,12 +19,9 @@ namespace Business.EntityService
         {
             throw new NotImplementedException();
         }
-
-        public override ICollection<Person> GetAll()
-            => this.GetAll(this.UnitOfWork.PersonRepository);
-
-        public override Person GetById(int id)
-            => this.GetById(id, this.UnitOfWork.PersonRepository);
+               
+        protected override IEntityRepository<Person> GetRepository()
+            => this.UnitOfWork.PersonRepository;
 
         public PersonService(IUnitOfWork unitOfWork) : base(unitOfWork)
         { }
