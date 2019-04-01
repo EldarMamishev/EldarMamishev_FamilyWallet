@@ -30,6 +30,12 @@ namespace Business.EntityService
 
         public void CreateWalletBypersonId(int personId, string name, WalletType walletType, int balance = 0)
         {
+            Person person = this.UnitOfWork.PersonRepository.GetById(personId)
+                ?? throw new InvalidForeignKeyException(typeof(Person).Name);
+
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+
             Wallet wallet = new Wallet { Name = name, Type = walletType, Balance = balance };
             this.UnitOfWork.WalletRepository.Add(wallet);
 
