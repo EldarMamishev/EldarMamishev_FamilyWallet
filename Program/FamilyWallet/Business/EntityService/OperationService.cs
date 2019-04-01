@@ -28,7 +28,7 @@ namespace Business.EntityService
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory operationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(operationType, operationName);
-            if(operationCategory == null)
+            if (operationCategory == null)
             {
                 operationCategory = new OperationCategory() { Type = operationType, Name = operationName };
                 this.UnitOfWork.OperationCategoryRepository.Add(operationCategory);
@@ -82,7 +82,7 @@ namespace Business.EntityService
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory fromOperationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(OperationType.Spending, typeof(Transaction).Name);
-            if(fromOperationCategory == null)
+            if (fromOperationCategory == null)
             {
                 fromOperationCategory = new OperationCategory() { Type = OperationType.Spending, Name = typeof(Transaction).Name };
                 this.UnitOfWork.OperationCategoryRepository.Add(fromOperationCategory);
