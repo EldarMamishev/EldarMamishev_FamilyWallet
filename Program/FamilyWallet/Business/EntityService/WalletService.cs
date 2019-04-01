@@ -62,5 +62,13 @@ namespace Business.EntityService
 
         public override Wallet GetById(int id) 
             => this.GetById(id, this.UnitOfWork.WalletRepository);
+
+        public void Rename(int id, string name)
+        {
+            Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id)
+               ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
+
+            wallet.Name = name;
+        }
     }
 }
