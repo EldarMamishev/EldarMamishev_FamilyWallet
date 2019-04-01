@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Business.Exceptions
 {
-    public class InvalidPrimaryKeyException : Exception
+    public class InvalidPrimaryKeyException : InvalidPropertyException
     {
         public InvalidPrimaryKeyException(string message)
             : base(message)

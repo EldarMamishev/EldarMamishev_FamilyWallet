@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Business.Exceptions
 {
-    public class NoEntityExistingException : Exception
+    public class InvalidPropertyException : Exception
     {
-        public NoEntityExistingException(string message) 
+        public InvalidPropertyException(string message)
             : base(message)
         { }
     }
 }
+

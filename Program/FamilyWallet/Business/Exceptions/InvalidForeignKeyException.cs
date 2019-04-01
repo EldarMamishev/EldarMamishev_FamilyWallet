@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Business.Exceptions
 {
-    public class InvalidForeignKeyException : Exception
+    public class InvalidForeignKeyException : InvalidPropertyException
     {
         public InvalidForeignKeyException(string message)
             : base(message)
