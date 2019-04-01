@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.EntityService.Base;
+using Business.EntityService.Interface;
 using Business.Exceptions;
 using Business.Validation.EntityValidation.Interface;
 using Business.Validation.Interface;
@@ -10,7 +11,7 @@ using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
-    public class FamilyService : EntityServiceBase<Family>
+    public class FamilyService : EntityServiceBase<Family>, IFamilyService
     {
         public void AddPersonToFamily(int id, int personId)
         {
