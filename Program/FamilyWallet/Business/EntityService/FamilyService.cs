@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Business.EntityService.Base;
 using Business.Exceptions;
+using Business.Validation.EntityValidation.Interface;
+using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository.Base;
@@ -36,9 +38,10 @@ namespace Business.EntityService
             throw new NotImplementedException();
         }
 
-        public FamilyService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        { }   
-        
+        public FamilyService(IUnitOfWork unitOfWork, IEntityValidator<Family> entityValidator, IArgumentValidator argumentValidator) 
+            : base(unitOfWork, entityValidator, argumentValidator)
+        { }
+
         protected override IEntityRepository<Family> GetRepository()
             => this.UnitOfWork.FamilyRepository;     
 

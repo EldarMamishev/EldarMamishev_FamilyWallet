@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Business.EntityService.Base;
 using Business.Exceptions;
+using Business.Validation.EntityValidation.Interface;
+using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
@@ -39,6 +41,21 @@ namespace Business.EntityService
 
             Operation operation = new Operation() { OperationCategoryID = operationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = personWallet.ID };
             this.UnitOfWork.OperationRepository.Add(operation);
+        }
+
+        private void CountNewWalletBalance(Wallet wallet, int balance, OperationType operationType)
+        {
+            switch (operationType)
+            {
+                case OperationType.Earning:
+                    wallet.Balance += balance;
+                    break;
+                case OperationType.Spending:
+                    wallet.Balance -= balance;
+                    break;
+            }
+
+            this.UnitOfWork.WalletRepository.Update(wallet);
         }
 
         public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, int balance, string description, DateTime? date)
@@ -94,21 +111,6 @@ namespace Business.EntityService
             this.UnitOfWork.OperationRepository.Add(toOperation);
         }
 
-        private void CountNewWalletBalance(Wallet wallet, int balance, OperationType operationType)
-        {
-            switch (operationType)
-            {
-                case OperationType.Earning:
-                    wallet.Balance += balance;
-                    break;
-                case OperationType.Spending:
-                    wallet.Balance -= balance;
-                    break;
-            }
-
-            this.UnitOfWork.WalletRepository.Update(wallet);
-        }
-
         public void Delete(int id)
         {
             throw new NotImplementedException();
@@ -117,7 +119,8 @@ namespace Business.EntityService
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public OperationService(IUnitOfWork unitOfWork, IEntityValidator<Operation> entityValidator, IArgumentValidator argumentValidator) 
+            : base(unitOfWork, entityValidator, argumentValidator)
         { }
     }
 }

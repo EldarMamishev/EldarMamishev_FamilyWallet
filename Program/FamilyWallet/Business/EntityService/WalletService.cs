@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Business.EntityService.Base;
 using Business.Exceptions;
+using Business.Validation.EntityValidation.Interface;
+using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
@@ -72,7 +74,7 @@ namespace Business.EntityService
             wallet.Name = name;
         }
 
-        public WalletService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator, IArgumentValidator argumentValidator) : base(unitOfWork, entityValidator, argumentValidator)
         { }
     }
 }
