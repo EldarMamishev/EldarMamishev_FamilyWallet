@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Business.EntityService.Base;
 using Business.Exceptions;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
-using Domain.Repository.Base;
 
 namespace Business.EntityService
 {
