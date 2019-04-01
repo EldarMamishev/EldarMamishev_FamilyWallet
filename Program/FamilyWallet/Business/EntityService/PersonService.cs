@@ -18,6 +18,7 @@ namespace Business.EntityService
 
             Person person = new Person() { Name = name, Surname = surname };
             this.UnitOfWork.PersonRepository.Add(person);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void Delete(int id)

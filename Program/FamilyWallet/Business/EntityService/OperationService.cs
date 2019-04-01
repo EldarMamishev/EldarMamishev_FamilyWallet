@@ -41,6 +41,7 @@ namespace Business.EntityService
 
             Operation operation = new Operation() { OperationCategoryID = operationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = personWallet.ID };
             this.UnitOfWork.OperationRepository.Add(operation);
+            this.UnitOfWork.SaveChanges();
         }
 
         private void CountNewWalletBalance(Wallet wallet, decimal balance, OperationType operationType)
@@ -108,6 +109,7 @@ namespace Business.EntityService
 
             Operation toOperation = new Operation() { OperationCategoryID = toOperationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = toPersonWallet.ID, TransactionID = transaction.ID };
             this.UnitOfWork.OperationRepository.Add(toOperation);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void Delete(int id)

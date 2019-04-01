@@ -28,6 +28,7 @@ namespace Business.EntityService
 
             PersonWallet personWallet = new PersonWallet { WalletID = id, PersonID = personId, AccessModifier = accessModifier };
             this.UnitOfWork.PersonWalletRepository.Add(personWallet);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void CreateWalletByPersonId(int personId, string name, WalletType walletType, decimal balance = 0)
@@ -42,6 +43,7 @@ namespace Business.EntityService
 
             PersonWallet personWallet = new PersonWallet { WalletID = wallet.ID, PersonID = personId, AccessModifier = AccessModifier.Manage };
             this.UnitOfWork.PersonWalletRepository.Add(personWallet);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void Delete(int id)
@@ -62,6 +64,7 @@ namespace Business.EntityService
             wallet.Name = name;
 
             this.UnitOfWork.WalletRepository.Update(wallet);
+            this.UnitOfWork.SaveChanges();
         }
 
         public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator, IArgumentValidator argumentValidator) 

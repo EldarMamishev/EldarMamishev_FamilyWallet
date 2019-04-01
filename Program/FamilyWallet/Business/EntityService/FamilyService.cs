@@ -22,6 +22,7 @@ namespace Business.EntityService
 
             PersonFamily personFamily = new PersonFamily() { FamilyID = id, PersonID = personId };
             this.UnitOfWork.PersonFamilyRepository.Add(personFamily);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void Create(int personId, string name)
@@ -35,6 +36,7 @@ namespace Business.EntityService
 
             PersonFamily personFamily = new PersonFamily { PersonID = personId, FamilyID = family.ID };
             this.UnitOfWork.PersonFamilyRepository.Add(personFamily);
+            this.UnitOfWork.SaveChanges();
         }
 
         public void Delete(int id)
@@ -57,6 +59,7 @@ namespace Business.EntityService
 
             family.Name = name;
             this.UnitOfWork.FamilyRepository.Update(family);
+            this.UnitOfWork.SaveChanges();
         }
     }
 }
