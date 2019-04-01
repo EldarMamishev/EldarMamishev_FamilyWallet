@@ -19,8 +19,6 @@ namespace Business.EntityService
             => this.GetById(id, this.UnitOfWork.OperationRepository);
 
         public OperationService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-
-        }
+        { }
     }
 }
