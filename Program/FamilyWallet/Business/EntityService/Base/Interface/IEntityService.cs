@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
 
 namespace Business.EntityService.Base.Interface

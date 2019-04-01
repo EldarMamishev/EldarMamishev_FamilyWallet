@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Business.Validation.Interface
+﻿namespace Business.Validation.Interface
 {
     public interface IArgumentValidator
     {
