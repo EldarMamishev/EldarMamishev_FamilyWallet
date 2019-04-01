@@ -54,8 +54,10 @@ namespace Business.EntityService
             this.UnitOfWork.PersonWalletRepository.Add(personWallet);
         }
 
-        public override void Delete(int id) 
-            => this.Delete(id, this.UnitOfWork.WalletRepository);
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ICollection<Wallet> GetAll() 
             => this.GetAll(this.UnitOfWork.WalletRepository);

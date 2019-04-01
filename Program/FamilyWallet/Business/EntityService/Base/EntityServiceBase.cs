@@ -11,11 +11,6 @@ namespace Business.EntityService.Base
     public abstract class EntityServiceBase<TEntity> : IEntityService<TEntity>
         where TEntity : EntityBase
     {
-
-        public abstract void Delete(int id);
-
-        protected void Delete(int id, IEntityRepository<TEntity> entityRepository) => entityRepository.Delete(entityRepository.GetById(id));
-
         public EntityServiceBase(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;

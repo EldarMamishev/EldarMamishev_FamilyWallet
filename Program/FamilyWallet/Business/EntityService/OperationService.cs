@@ -9,8 +9,10 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>
     {
-        public override void Delete(int id)
-            => this.Delete(id, this.UnitOfWork.OperationRepository);
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ICollection<Operation> GetAll()
             => this.GetAll(this.UnitOfWork.OperationRepository);
@@ -20,5 +22,7 @@ namespace Business.EntityService
 
         public OperationService(IUnitOfWork unitOfWork) : base(unitOfWork)
         { }
+
+        public 
     }
 }

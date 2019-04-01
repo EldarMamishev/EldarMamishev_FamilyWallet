@@ -10,7 +10,6 @@ namespace Business.EntityService.Interface
     public interface IEntityService<TEntity>
         where TEntity : EntityBase
     {
-        void Delete(int id);
         ICollection<TEntity> GetAll();
         TEntity GetById(int id);
         IUnitOfWork UnitOfWork { get; }

@@ -15,8 +15,10 @@ namespace Business.EntityService
             this.UnitOfWork.PersonRepository.Add(person);
         }
 
-        public override void Delete(int id)
-            => this.Delete(id, this.UnitOfWork.PersonRepository);
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ICollection<Person> GetAll()
             => this.GetAll(this.UnitOfWork.PersonRepository);
