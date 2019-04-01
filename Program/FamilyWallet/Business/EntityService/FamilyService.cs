@@ -26,6 +26,10 @@ namespace Business.EntityService
 
         public void Create(int personId, string name)
         {
+            Person person = this.UnitOfWork.PersonRepository.GetById(personId)
+                ?? throw new InvalidForeignKeyException(typeof(Person).Name);
+            this.ArgumentValidator.CheckForNull(name, nameof(name));
+
             Family family = new Family() { Name = name };
             this.UnitOfWork.FamilyRepository.Add(family);
 
@@ -49,7 +53,9 @@ namespace Business.EntityService
         {
             Family family = this.UnitOfWork.FamilyRepository.GetById(id)
                 ?? throw new InvalidPrimaryKeyException(typeof(Family).Name);
+            this.ArgumentValidator.CheckForNull(name, nameof(name));
 
+            family.Name = name;
             this.UnitOfWork.FamilyRepository.Update(family);
         }
     }

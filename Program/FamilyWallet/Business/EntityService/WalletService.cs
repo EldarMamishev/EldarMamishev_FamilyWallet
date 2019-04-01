@@ -30,13 +30,12 @@ namespace Business.EntityService
             this.UnitOfWork.PersonWalletRepository.Add(personWallet);
         }
 
-        public void CreateWalletBypersonId(int personId, string name, WalletType walletType, int balance = 0)
+        public void CreateWalletByPersonId(int personId, string name, WalletType walletType, decimal balance = 0)
         {
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
+            this.ArgumentValidator.CheckForNull(name, nameof(name));
 
             Wallet wallet = new Wallet { Name = name, Type = walletType, Balance = balance };
             this.UnitOfWork.WalletRepository.Add(wallet);
@@ -53,28 +52,20 @@ namespace Business.EntityService
         protected override IEntityRepository<Wallet> GetRepository()
             => this.UnitOfWork.WalletRepository;
 
-        public void Update(int id, int? familyId, string name, WalletType walletType, int balance)
-        {
+        public void Rename(int id, string name)
+        { 
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id) 
                 ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
 
-            wallet.FamilyID = familyId;
+            this.ArgumentValidator.CheckForNull(name, nameof(name));
+
             wallet.Name = name;
-            wallet.Type = walletType;
-            wallet.Balance = balance;
 
             this.UnitOfWork.WalletRepository.Update(wallet);
         }
 
-        public void Rename(int id, string name)
-        {
-            Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id)
-               ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
-
-            wallet.Name = name;
-        }
-
-        public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator, IArgumentValidator argumentValidator) : base(unitOfWork, entityValidator, argumentValidator)
+        public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator, IArgumentValidator argumentValidator) 
+            : base(unitOfWork, entityValidator, argumentValidator)
         { }
     }
 }

@@ -13,7 +13,7 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>
     {
-        public void CreateOneWalletOperation(int personId, int walletId, int balance, string description, string operationName, OperationType operationType, DateTime? date)
+        public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
@@ -21,8 +21,8 @@ namespace Business.EntityService
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(walletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
 
-            if (balance <= 0)
-                throw new InvalidPropertyException(nameof(balance));
+            this.ArgumentValidator.CheckForNull(description, nameof(description));
+            this.ArgumentValidator.CheckForNull(operationName, nameof(operationName));
 
             PersonWallet personWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(personId, walletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
@@ -43,7 +43,7 @@ namespace Business.EntityService
             this.UnitOfWork.OperationRepository.Add(operation);
         }
 
-        private void CountNewWalletBalance(Wallet wallet, int balance, OperationType operationType)
+        private void CountNewWalletBalance(Wallet wallet, decimal balance, OperationType operationType)
         {
             switch (operationType)
             {
@@ -58,7 +58,7 @@ namespace Business.EntityService
             this.UnitOfWork.WalletRepository.Update(wallet);
         }
 
-        public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, int balance, string description, DateTime? date)
+        public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, decimal balance, string description, DateTime? date)
         {
             Person fromPerson = this.UnitOfWork.PersonRepository.GetById(frompersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
@@ -72,8 +72,7 @@ namespace Business.EntityService
             Wallet toWallet = this.UnitOfWork.WalletRepository.GetById(toWalletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
 
-            if (balance <= 0)
-                throw new InvalidPropertyException(nameof(balance));
+            this.ArgumentValidator.CheckForNull(description, nameof(description));
 
             PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(frompersonId, fromWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
