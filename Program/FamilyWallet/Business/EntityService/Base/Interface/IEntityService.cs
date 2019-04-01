@@ -2,7 +2,7 @@
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
 
-namespace Business.EntityService.Interface
+namespace Business.EntityService.Base.Interface
 {
     public interface IEntityService<TEntity>
         where TEntity : EntityBase

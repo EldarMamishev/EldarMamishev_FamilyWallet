@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Business.EntityService.Interface;
+using Business.EntityService.Base.Interface;
 using Business.Validation.EntityValidation.Interface;
 using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
