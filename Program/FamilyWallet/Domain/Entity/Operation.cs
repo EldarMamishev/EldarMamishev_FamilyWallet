@@ -19,8 +19,10 @@ namespace Domain.Entity
         {
             if (this.PersonWallet == null)
                 yield return new ValidationResult(nameof(this.PersonWallet));
+
             if (this.OperationInfo == null)
                 yield return new ValidationResult(nameof(this.OperationInfo));
+
             if (this.OperationCategory == null)
                 yield return new ValidationResult(nameof(this.OperationCategory));
         }

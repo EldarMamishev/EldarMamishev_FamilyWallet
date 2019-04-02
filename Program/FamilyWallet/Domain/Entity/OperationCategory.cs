@@ -15,8 +15,10 @@ namespace Domain.Entity
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             string pattern = @"^[\s\w\p{P}]{1, 30}$";
+
             if (Regex.IsMatch(this.Name, pattern))
                 yield return new ValidationResult(nameof(this.Name));
+
             if (this.Operations == null)
                 yield return new ValidationResult(nameof(this.Operations));
         }

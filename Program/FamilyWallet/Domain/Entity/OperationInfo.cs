@@ -18,8 +18,10 @@ namespace Domain.Entity
             string pattern = @"^[\s\w\p{P}]{1, 100}$";
             if (this.Date.Date > DateTime.Now.Date)
                 yield return new ValidationResult(nameof(this.Date));
+
             if (this.Balance <= 0)
                 yield return new ValidationResult(nameof(this.Balance));
+
             if (this.Description.Length == 0 || Regex.IsMatch(this.Description, pattern))
                 yield return new ValidationResult(nameof(this.Description));
         }
