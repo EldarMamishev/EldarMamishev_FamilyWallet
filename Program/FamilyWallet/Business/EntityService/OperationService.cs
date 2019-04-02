@@ -112,16 +112,11 @@ namespace Business.EntityService
             this.UnitOfWork.SaveChanges();
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork, IEntityValidator<Operation> entityValidator) 
-            : base(unitOfWork, entityValidator)
+        public OperationService(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         { }
     }
 }

@@ -2,7 +2,6 @@
 using Business.EntityService.Base;
 using Business.EntityService.Interface;
 using Business.Static;
-using Business.Validation.EntityValidation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository.Base;
@@ -20,17 +19,12 @@ namespace Business.EntityService
             this.GetRepository().Add(person);
             this.UnitOfWork.SaveChanges();
         }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
                
         protected override IEntityRepository<Person> GetRepository()
             => this.UnitOfWork.PersonRepository;
 
-        public PersonService(IUnitOfWork unitOfWork, IEntityValidator<Person> entityValidator) 
-            : base(unitOfWork, entityValidator)
+        public PersonService(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         { }
     }
 }

@@ -3,7 +3,6 @@ using Business.EntityService.Base;
 using Business.EntityService.Interface;
 using Business.Exceptions;
 using Business.Static;
-using Business.Validation.EntityValidation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository.Base;
@@ -40,13 +39,8 @@ namespace Business.EntityService
             this.UnitOfWork.SaveChanges();
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public FamilyService(IUnitOfWork unitOfWork, IEntityValidator<Family> entityValidator) 
-            : base(unitOfWork, entityValidator)
+        public FamilyService(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         { }
 
         protected override IEntityRepository<Family> GetRepository()
