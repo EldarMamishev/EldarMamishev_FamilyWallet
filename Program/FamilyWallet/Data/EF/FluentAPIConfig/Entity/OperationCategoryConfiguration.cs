@@ -14,6 +14,12 @@ namespace Data.EF.FluentAPIConfig.Entity
                 .WithOne(o => o.OperationCategory)
                 .HasForeignKey(o => o.OperationCategoryID)
                 .IsRequired(true);
+
+            builder.Property(oc => oc.Name)
+                .IsRequired(true);
+
+            builder.Property(oc => oc.Type)
+                .IsRequired(true);
         }
     }
 }

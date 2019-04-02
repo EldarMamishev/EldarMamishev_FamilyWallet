@@ -19,6 +19,15 @@ namespace Data.EF.FluentAPIConfig.Entity
                 .WithOne(pw => pw.Wallet)
                 .HasForeignKey(pw => pw.WalletID)
                 .IsRequired(true);
+
+            builder.Property(w => w.Balance)
+                .IsRequired(true);
+
+            builder.Property(w => w.Name)
+                .IsRequired(true);
+
+            builder.Property(w => w.Type)
+                .IsRequired(true);
         }
     }
 }
