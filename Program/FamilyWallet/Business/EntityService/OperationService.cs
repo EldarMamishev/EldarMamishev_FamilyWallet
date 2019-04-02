@@ -2,8 +2,8 @@
 using Business.EntityService.Base;
 using Business.EntityService.Interface;
 using Business.Exceptions;
+using Business.Static;
 using Business.Validation.EntityValidation.Interface;
-using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
@@ -15,14 +15,14 @@ namespace Business.EntityService
     {
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
+            CheckArgument.CheckForNull(description, nameof(description));
+            CheckArgument.CheckForNull(operationName, nameof(operationName));
+
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
-                ?? throw new InvalidForeignKeyException(typeof(Person).Name);
+                ?? throw new InvalidForeignKeyException(typeof(Person).Name);             
 
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(walletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
-
-            this.ArgumentValidator.CheckForNull(description, nameof(description));
-            this.ArgumentValidator.CheckForNull(operationName, nameof(operationName));
 
             PersonWallet personWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(personId, walletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
@@ -36,11 +36,11 @@ namespace Business.EntityService
 
             this.CountNewWalletBalance(wallet, balance, operationType);
 
-            OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.UtcNow };
+            OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
             this.UnitOfWork.OperationInfoRepository.Add(operationInfo);
 
             Operation operation = new Operation() { OperationCategoryID = operationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = personWallet.ID };
-            this.UnitOfWork.OperationRepository.Add(operation);
+            this.GetRepository().Add(operation);
             this.UnitOfWork.SaveChanges();
         }
 
@@ -61,6 +61,8 @@ namespace Business.EntityService
 
         public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, decimal balance, string description, DateTime? date)
         {
+            CheckArgument.CheckForNull(description, nameof(description));
+
             Person fromPerson = this.UnitOfWork.PersonRepository.GetById(frompersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
@@ -72,8 +74,6 @@ namespace Business.EntityService
 
             Wallet toWallet = this.UnitOfWork.WalletRepository.GetById(toWalletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
-
-            this.ArgumentValidator.CheckForNull(description, nameof(description));
 
             PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(frompersonId, fromWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
@@ -98,17 +98,17 @@ namespace Business.EntityService
             this.CountNewWalletBalance(fromWallet, balance, fromOperationCategory.Type);
             this.CountNewWalletBalance(toWallet, balance, toOperationCategory.Type);
 
-            OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.UtcNow };
+            OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
             this.UnitOfWork.OperationInfoRepository.Add(operationInfo);
 
             Transaction transaction = new Transaction();
             this.UnitOfWork.TransactionRepository.Add(transaction);
 
             Operation fromOperation = new Operation() { OperationCategoryID = fromOperationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = fromPersonWallet.ID, TransactionID = transaction.ID };
-            this.UnitOfWork.OperationRepository.Add(fromOperation);
+            this.GetRepository().Add(fromOperation);
 
             Operation toOperation = new Operation() { OperationCategoryID = toOperationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = toPersonWallet.ID, TransactionID = transaction.ID };
-            this.UnitOfWork.OperationRepository.Add(toOperation);
+            this.GetRepository().Add(toOperation);
             this.UnitOfWork.SaveChanges();
         }
 

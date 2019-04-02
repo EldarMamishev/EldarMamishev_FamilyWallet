@@ -1,8 +1,8 @@
 ﻿using System;
 using Business.EntityService.Base;
 using Business.EntityService.Interface;
+using Business.Static;
 using Business.Validation.EntityValidation.Interface;
-using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository.Base;
@@ -13,11 +13,11 @@ namespace Business.EntityService
     {
         public void Create(string name, string surname)
         {
-            this.ArgumentValidator.CheckForNull(name, nameof(name));
-            this.ArgumentValidator.CheckForNull(surname, nameof(surname));
+            CheckArgument.CheckForNull(name, nameof(name));
+            CheckArgument.CheckForNull(surname, nameof(surname));
 
             Person person = new Person() { Name = name, Surname = surname };
-            this.UnitOfWork.PersonRepository.Add(person);
+            this.GetRepository().Add(person);
             this.UnitOfWork.SaveChanges();
         }
 

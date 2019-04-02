@@ -2,8 +2,8 @@
 using Business.EntityService.Base;
 using Business.EntityService.Interface;
 using Business.Exceptions;
+using Business.Static;
 using Business.Validation.EntityValidation.Interface;
-using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
@@ -33,13 +33,13 @@ namespace Business.EntityService
 
         public void CreateWalletByPersonId(int personId, string name, WalletType walletType, decimal balance = 0)
         {
+            CheckArgument.CheckForNull(name, nameof(name));
+
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
-            this.ArgumentValidator.CheckForNull(name, nameof(name));
-
             Wallet wallet = new Wallet { Name = name, Type = walletType, Balance = balance };
-            this.UnitOfWork.WalletRepository.Add(wallet);
+            this.GetRepository().Add(wallet);
 
             PersonWallet personWallet = new PersonWallet { WalletID = wallet.ID, PersonID = personId, AccessModifier = AccessModifier.Manage };
             this.UnitOfWork.PersonWalletRepository.Add(personWallet);
@@ -55,15 +55,15 @@ namespace Business.EntityService
             => this.UnitOfWork.WalletRepository;
 
         public void Rename(int id, string name)
-        { 
+        {
+            CheckArgument.CheckForNull(name, nameof(name));
+
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id) 
                 ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
 
-            this.ArgumentValidator.CheckForNull(name, nameof(name));
-
             wallet.Name = name;
 
-            this.UnitOfWork.WalletRepository.Update(wallet);
+            this.GetRepository().Update(wallet);
             this.UnitOfWork.SaveChanges();
         }
 

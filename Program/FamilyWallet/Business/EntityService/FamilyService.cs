@@ -2,8 +2,8 @@
 using Business.EntityService.Base;
 using Business.EntityService.Interface;
 using Business.Exceptions;
+using Business.Static;
 using Business.Validation.EntityValidation.Interface;
-using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository.Base;
@@ -27,12 +27,13 @@ namespace Business.EntityService
 
         public void Create(int personId, string name)
         {
+            CheckArgument.CheckForNull(name, nameof(name));
+
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
-            this.ArgumentValidator.CheckForNull(name, nameof(name));
 
             Family family = new Family() { Name = name };
-            this.UnitOfWork.FamilyRepository.Add(family);
+            this.GetRepository().Add(family);
 
             PersonFamily personFamily = new PersonFamily { PersonID = personId, FamilyID = family.ID };
             this.UnitOfWork.PersonFamilyRepository.Add(personFamily);
@@ -53,12 +54,13 @@ namespace Business.EntityService
 
         public void Update(int id, string name)
         {
+            CheckArgument.CheckForNull(name, nameof(name));
+
             Family family = this.UnitOfWork.FamilyRepository.GetById(id)
                 ?? throw new InvalidPrimaryKeyException(typeof(Family).Name);
-            this.ArgumentValidator.CheckForNull(name, nameof(name));
 
             family.Name = name;
-            this.UnitOfWork.FamilyRepository.Update(family);
+            this.GetRepository().Update(family);
             this.UnitOfWork.SaveChanges();
         }
     }

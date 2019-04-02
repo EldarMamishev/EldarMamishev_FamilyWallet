@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Business.EntityService.Base.Interface;
 using Business.Validation.EntityValidation.Interface;
-using Business.Validation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
 using Domain.Repository.Base;
@@ -13,6 +12,8 @@ namespace Business.EntityService.Base
         where TEntity : EntityBase
     {
         private readonly IArgumentValidator argumentValidator;
+        private readonly IEntityValidator<TEntity> entityValidator;
+        private readonly IUnitOfWork unitOfWork;
 
         protected IArgumentValidator ArgumentValidator => this.argumentValidator;
 
@@ -28,8 +29,6 @@ namespace Business.EntityService.Base
                 ?? throw new ArgumentNullException(nameof(argumentValidator));
         }
 
-        private readonly IEntityValidator<TEntity> entityValidator;
-
         protected IEntityValidator<TEntity> EntityValidator => this.entityValidator;
 
         public ICollection<TEntity> GetAll() => this.GetRepository().GetAll();
@@ -37,8 +36,6 @@ namespace Business.EntityService.Base
         public TEntity GetById(int id) => this.GetRepository().GetById(id);
 
         protected abstract IEntityRepository<TEntity> GetRepository();
-
-        private readonly IUnitOfWork unitOfWork;
 
         protected IUnitOfWork UnitOfWork => this.unitOfWork;
     }
