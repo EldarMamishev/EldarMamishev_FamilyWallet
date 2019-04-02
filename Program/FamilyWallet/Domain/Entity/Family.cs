@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using Domain.Entity.Base;
 
 namespace Domain.Entity
@@ -12,8 +13,11 @@ namespace Domain.Entity
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            string pattern = @""
-            if(Name)
+            string pattern = @"[\s\w\p{P}]";
+            if (Regex.IsMatch(this.Name, pattern))
+                yield return new ValidationResult(nameof(this.Name));
+            if (this.PersonFamilies == null || this.PersonFamilies.Count == 0)
+                yield return new ValidationResult(nameof(this.PersonFamilies));
         }
     }
 }
