@@ -13,7 +13,7 @@ namespace Business.EntityService
     {
         public void AddPersonToFamily(int id, int personId)
         {
-            Family family = this.UnitOfWork.FamilyRepository.GetById(id)
+            Family family = this.GetRepository().GetById(id)
                 ?? throw new InvalidPrimaryKeyException(typeof(Family).Name);
 
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
@@ -50,7 +50,7 @@ namespace Business.EntityService
         {
             CheckArgument.CheckForNull(name, nameof(name));
 
-            Family family = this.UnitOfWork.FamilyRepository.GetById(id)
+            Family family = this.GetRepository().GetById(id)
                 ?? throw new InvalidPrimaryKeyException(typeof(Family).Name);
 
             family.Name = name;
