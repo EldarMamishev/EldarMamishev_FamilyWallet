@@ -67,8 +67,8 @@ namespace Business.EntityService
             this.UnitOfWork.SaveChanges();
         }
 
-        public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator, IArgumentValidator argumentValidator) 
-            : base(unitOfWork, entityValidator, argumentValidator)
+        public WalletService(IUnitOfWork unitOfWork, IEntityValidator<Wallet> entityValidator) 
+            : base(unitOfWork, entityValidator)
         { }
     }
 }

@@ -120,8 +120,8 @@ namespace Business.EntityService
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork, IEntityValidator<Operation> entityValidator, IArgumentValidator argumentValidator) 
-            : base(unitOfWork, entityValidator, argumentValidator)
+        public OperationService(IUnitOfWork unitOfWork, IEntityValidator<Operation> entityValidator) 
+            : base(unitOfWork, entityValidator)
         { }
     }
 }

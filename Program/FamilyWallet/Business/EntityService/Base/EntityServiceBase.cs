@@ -11,22 +11,16 @@ namespace Business.EntityService.Base
     public abstract class EntityServiceBase<TEntity> : IEntityService<TEntity>
         where TEntity : EntityBase
     {
-        private readonly IArgumentValidator argumentValidator;
         private readonly IEntityValidator<TEntity> entityValidator;
         private readonly IUnitOfWork unitOfWork;
 
-        protected IArgumentValidator ArgumentValidator => this.argumentValidator;
-
-        public EntityServiceBase(IUnitOfWork unitOfWork, IEntityValidator<TEntity> entityValidator, IArgumentValidator argumentValidator)
+        public EntityServiceBase(IUnitOfWork unitOfWork, IEntityValidator<TEntity> entityValidator)
         {
             this.unitOfWork = unitOfWork 
                 ?? throw new ArgumentNullException(nameof(unitOfWork));
 
             this.entityValidator = entityValidator
                 ?? throw new ArgumentNullException(nameof(entityValidator));
-
-            this.argumentValidator = argumentValidator
-                ?? throw new ArgumentNullException(nameof(argumentValidator));
         }
 
         protected IEntityValidator<TEntity> EntityValidator => this.entityValidator;

@@ -45,8 +45,8 @@ namespace Business.EntityService
             throw new NotImplementedException();
         }
 
-        public FamilyService(IUnitOfWork unitOfWork, IEntityValidator<Family> entityValidator, IArgumentValidator argumentValidator) 
-            : base(unitOfWork, entityValidator, argumentValidator)
+        public FamilyService(IUnitOfWork unitOfWork, IEntityValidator<Family> entityValidator) 
+            : base(unitOfWork, entityValidator)
         { }
 
         protected override IEntityRepository<Family> GetRepository()

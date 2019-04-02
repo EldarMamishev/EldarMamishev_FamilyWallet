@@ -29,8 +29,8 @@ namespace Business.EntityService
         protected override IEntityRepository<Person> GetRepository()
             => this.UnitOfWork.PersonRepository;
 
-        public PersonService(IUnitOfWork unitOfWork, IEntityValidator<Person> entityValidator, IArgumentValidator argumentValidator) 
-            : base(unitOfWork, entityValidator, argumentValidator)
+        public PersonService(IUnitOfWork unitOfWork, IEntityValidator<Person> entityValidator) 
+            : base(unitOfWork, entityValidator)
         { }
     }
 }
