@@ -1,9 +1,9 @@
 ﻿using System;
 using Business.EntityService.Base;
+using Business.EntityService.Handler.Interface;
 using Business.EntityService.Interface;
 using Business.Exceptions;
 using Business.Static;
-using Business.Validation.EntityValidation.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Enum;
@@ -13,6 +13,8 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>, IOperationService
     {
+        private IBalanceCounter balanceCounter;
+
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
             CheckArgument.CheckForNull(description, nameof(description));
@@ -34,7 +36,8 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(operationCategory);
             }
 
-            this.CountNewWalletBalance(wallet, balance, operationType);
+            wallet.Balance = balanceCounter.CountNewWalletBalance(wallet.Balance, balance, operationType);
+            this.UnitOfWork.WalletRepository.Update(wallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
             this.UnitOfWork.OperationInfoRepository.Add(operationInfo);
@@ -42,22 +45,7 @@ namespace Business.EntityService
             Operation operation = new Operation() { OperationCategoryID = operationCategory.ID, OperationInfoID = operationInfo.ID, PersonWalletID = personWallet.ID };
             this.GetRepository().Add(operation);
             this.UnitOfWork.SaveChanges();
-        }
-
-        private void CountNewWalletBalance(Wallet wallet, decimal balance, OperationType operationType)
-        {
-            switch (operationType)
-            {
-                case OperationType.Earning:
-                    wallet.Balance += balance;
-                    break;
-                case OperationType.Spending:
-                    wallet.Balance -= balance;
-                    break;
-            }
-
-            this.UnitOfWork.WalletRepository.Update(wallet);
-        }
+        }        
 
         public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, decimal balance, string description, DateTime? date)
         {
@@ -95,8 +83,11 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(toOperationCategory);
             }
 
-            this.CountNewWalletBalance(fromWallet, balance, fromOperationCategory.Type);
-            this.CountNewWalletBalance(toWallet, balance, toOperationCategory.Type);
+            fromWallet.Balance = balanceCounter.CountNewWalletBalance(fromWallet.Balance, balance, fromOperationCategory.Type);
+            this.UnitOfWork.WalletRepository.Update(fromWallet);
+
+            toWallet.Balance = balanceCounter.CountNewWalletBalance(toWallet.Balance, balance, toOperationCategory.Type);
+            this.UnitOfWork.WalletRepository.Update(toWallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
             this.UnitOfWork.OperationInfoRepository.Add(operationInfo);
@@ -115,8 +106,10 @@ namespace Business.EntityService
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork) 
+        public OperationService(IUnitOfWork unitOfWork, IBalanceCounter balanceCounter) 
             : base(unitOfWork)
-        { }
+        {
+            this.balanceCounter = balanceCounter;
+        }
     }
 }
