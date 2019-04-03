@@ -5,7 +5,7 @@ using Domain.Enum;
 
 namespace Domain.Entity
 {
-    public class PersonWallet : EntityBase, IValidatableObject
+    public class PersonWallet : EntityBase
     {
         public int? PersonID { get; set; }
         public virtual Person Person { get; set; }
@@ -13,17 +13,5 @@ namespace Domain.Entity
         public virtual Wallet Wallet { get; set; }
         public AccessModifier AccessModifier { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (this.Person == null)
-                yield return new ValidationResult(nameof(this.Person));
-
-            if (this.Wallet == null)
-                yield return new ValidationResult(nameof(this.Wallet));
-
-            if (this.Operations == null || this.Operations.Count == 0)
-                yield return new ValidationResult(nameof(this.Operations));
-        }
     }
 }

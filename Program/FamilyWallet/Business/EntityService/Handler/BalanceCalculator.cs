@@ -6,7 +6,7 @@ using Domain.Enum;
 
 namespace Business.EntityService.Handler
 {
-    public class BalanceCounter : IBalanceCounter
+    public class BalanceCalculator : IBalanceCalculator
     {
         public decimal CountNewWalletBalance(decimal walletBalance, decimal operationBalance, OperationType operationType)
         {

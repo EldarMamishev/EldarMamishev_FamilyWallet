@@ -15,7 +15,7 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>, IOperationService
     {
-        private IBalanceCounter balanceCounter;
+        private readonly IBalanceCalculator balanceCalculator;
 
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
@@ -38,7 +38,7 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(operationCategory);
             }
 
-            wallet.Balance = balanceCounter.CountNewWalletBalance(wallet.Balance, balance, operationType);
+            wallet.Balance = balanceCalculator.CountNewWalletBalance(wallet.Balance, balance, operationType);
             this.UnitOfWork.WalletRepository.Update(wallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
@@ -85,10 +85,10 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(toOperationCategory);
             }
 
-            fromWallet.Balance = balanceCounter.CountNewWalletBalance(fromWallet.Balance, balance, fromOperationCategory.Type);
+            fromWallet.Balance = balanceCalculator.CountNewWalletBalance(fromWallet.Balance, balance, fromOperationCategory.Type);
             this.UnitOfWork.WalletRepository.Update(fromWallet);
 
-            toWallet.Balance = balanceCounter.CountNewWalletBalance(toWallet.Balance, balance, toOperationCategory.Type);
+            toWallet.Balance = balanceCalculator.CountNewWalletBalance(toWallet.Balance, balance, toOperationCategory.Type);
             this.UnitOfWork.WalletRepository.Update(toWallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
@@ -114,10 +114,11 @@ namespace Business.EntityService
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork, IBalanceCounter balanceCounter) 
+        public OperationService(IUnitOfWork unitOfWork, IBalanceCalculator balanceCalculator) 
             : base(unitOfWork)
         {
-            this.balanceCounter = balanceCounter;
+            CheckArgument.CheckForNull(balanceCalculator, nameof(balanceCalculator));
+            this.balanceCalculator = balanceCalculator;
         }
     }
 }

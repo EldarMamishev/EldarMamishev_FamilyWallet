@@ -6,7 +6,7 @@ using Domain.Enum;
 
 namespace Domain.Entity
 {
-    public class Wallet : EntityBase, IValidatableObject
+    public class Wallet : EntityBase
     {
         public int? FamilyID { get; set; }
         public virtual Family Family { get; set; }
@@ -15,14 +15,11 @@ namespace Domain.Entity
         public decimal Balance { get; set; }
         public virtual ICollection<PersonWallet> PersonWallets { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             string pattern = @"^[\s\w\p{P}]{1, 30}$";
 
-            if (this.Family == null)
-                yield return new ValidationResult(nameof(this.Family));
-
-            if (Regex.IsMatch(this.Name, pattern))
+            if (!Regex.IsMatch(this.Name, pattern))
                 yield return new ValidationResult(nameof(this.Name));
 
             if (this.Balance < 0)
