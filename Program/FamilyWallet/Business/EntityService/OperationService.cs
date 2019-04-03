@@ -104,12 +104,6 @@ namespace Business.EntityService
             this.GetRepository().Add(toOperation);
             this.UnitOfWork.SaveChanges();
         }
-        
-        public ICollection<Operation> GetOperationsByPersonId(int personId)
-            => this.UnitOfWork.OperationRepository.GetOperationsByPersonId(personId);
-
-        public ICollection<Operation> GetOperationsByWalletId(int walletId)
-            => this.UnitOfWork.OperationRepository.GetOperationsByWalletId(walletId);
 
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;

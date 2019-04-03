@@ -14,8 +14,11 @@ namespace Data.EF.Repository
         public OperationRepository(DbContext dbContext) : base(dbContext)
         { }
 
-        public ICollection<Operation> GetOperationsByDate(DateTime dateTime)
-            => this.dbContext.Set<Operation>().Where(o => o.OperationInfo.Date == dateTime.Date).ToList();
+        public ICollection<Operation> GetOperationsByDatePeriod(DateTime fromDate, DateTime toDate)
+            => this.dbContext.Set<Operation>().Where(o => o.OperationInfo.Date >= fromDate && o.OperationInfo.Date <= toDate).ToList();
+
+        public ICollection<Operation> GetOperationsByFamilyId(int familyId)
+            => this.dbContext.Set<Operation>().Where(o => o.PersonWallet.Wallet.FamilyID.Value == familyId).ToList();
 
         public ICollection<Operation> GetOperationsByOperationCategoryId(int operationCategoryId)
             => this.dbContext.Set<Operation>().Where(o => o.OperationCategoryID.Value == operationCategoryId).ToList();
