@@ -11,7 +11,7 @@ namespace Domain.Entity
         public virtual ICollection<PersonFamily> PersonFamilies { get; set; }
         public virtual ICollection<Wallet> Wallets { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             string pattern = @"[\s\w\p{P}]";
 
