@@ -16,14 +16,17 @@ namespace Data.EF.Repository.Base
             this.dbContext = dbContext;
         }
 
-        public void Add(TEntity entity) => this.dbContext.Set<TEntity>().Add(entity);
+        public void Add(TEntity entity)
+            => this.dbContext.Set<TEntity>().Add(entity);
 
-        public void Delete(TEntity entity) => this.dbContext.Set<TEntity>().Remove(entity);
+        public void Delete(TEntity entity)
+            => this.dbContext.Set<TEntity>().Remove(entity);
 
         public ICollection<TEntity> GetAll() => this.dbContext.Set<TEntity>().ToList();
 
         public TEntity GetById(int id) => this.dbContext.Set<TEntity>().Find(id);
 
-        public void Update(TEntity entity) => this.dbContext.Set<TEntity>().Update(entity);
+        public void Update(TEntity entity)
+            => this.dbContext.Set<TEntity>().Update(entity);
     }
 }

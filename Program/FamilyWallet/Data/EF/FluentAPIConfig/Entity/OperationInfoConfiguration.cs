@@ -20,6 +20,12 @@ namespace Data.EF.FluentAPIConfig.Entity
                 .HasColumnType("Date")
                 .HasDefaultValueSql("GetDate()")
                 .IsRequired(true);
+
+            builder.Property(oi => oi.Description)
+                .IsRequired(true);
+
+            builder.Property(oi => oi.Balance)
+                .IsRequired(true);
         }
     }
 }

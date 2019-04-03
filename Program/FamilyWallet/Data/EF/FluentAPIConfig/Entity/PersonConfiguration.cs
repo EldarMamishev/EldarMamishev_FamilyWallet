@@ -19,6 +19,12 @@ namespace Data.EF.FluentAPIConfig.Entity
                 .WithOne(pw => pw.Person)
                 .HasForeignKey(pw => pw.PersonID)
                 .IsRequired(true);
+
+            builder.Property(p => p.Name)
+                .IsRequired(true);
+
+            builder.Property(p => p.Surname)
+                .IsRequired(true);
         }
     }
 }
