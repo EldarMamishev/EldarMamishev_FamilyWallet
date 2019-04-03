@@ -111,8 +111,6 @@ namespace Business.EntityService
         public ICollection<Operation> GetOperationsByWalletId(int walletId)
             => this.UnitOfWork.OperationRepository.GetOperationsByWalletId(walletId);
 
-        public void 
-
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
