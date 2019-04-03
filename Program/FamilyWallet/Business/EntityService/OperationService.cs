@@ -13,7 +13,7 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>, IOperationService
     {
-        private IBalanceCalculator balanceCalculator;
+        private readonly IBalanceCalculator balanceCalculator;
 
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
@@ -109,6 +109,7 @@ namespace Business.EntityService
         public OperationService(IUnitOfWork unitOfWork, IBalanceCalculator balanceCalculator) 
             : base(unitOfWork)
         {
+            CheckArgument.CheckForNull(balanceCalculator, nameof(balanceCalculator));
             this.balanceCalculator = balanceCalculator;
         }
     }

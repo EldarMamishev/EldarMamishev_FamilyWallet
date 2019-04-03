@@ -8,8 +8,6 @@ namespace Domain.Entity.Base
         public int ID { get; set; }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            yield return new ValidationResult(string.Empty);
-        }
+            => new ValidationResult[0];
     }
 }
