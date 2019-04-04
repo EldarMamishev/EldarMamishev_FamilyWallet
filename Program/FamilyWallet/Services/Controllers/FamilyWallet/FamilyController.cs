@@ -7,48 +7,34 @@ using Business.EntityService.Base.Interface;
 using Business.EntityService.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
+using Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Services.Controllers.FamilyWallet.Base;
 
 namespace Services.Controllers.FamilyWallet
 {
     [Route("api/[controller]")]
-    public class FamilyController : EntityController<Family>
+    public class FamilyController : Controller
     {
-        public FamilyController(IEntityService<Family> entityService, IUnitOfWork unitOfWork) : base(entityService, unitOfWork)
-        { }
+        private readonly IFamilyService familyService;
+        private readonly IFamilyRepository familyRepository;
+
+        public FamilyController(IFamilyService familyService, IFamilyRepository familyRepository)
+        {
+            this.familyService = familyService;
+            this.familyRepository = familyRepository;
+        }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Family> Get()
-            => this.UnitOfWork.FamilyRepository.GetAll();
+        public IEnumerable<Family> Get() => this.familyRepository.GetAll();
 
         [HttpGet]
-        [Route("/{id : int}")]
-        public Family Get(int id)
-            => this.UnitOfWork.FamilyRepository.GetById(id);
+        [Route("{id:int}")]
+        public Family Get(int id) => this.familyRepository.GetById(id);
 
         [HttpGet]
-        [Route("/person/{id: int}")]
-        public IEnumerable<Family> GetByPersonId(int id)
-            => this.UnitOfWork.FamilyRepository.GetFamiliesByPersonId(id);
-
-        [HttpPost]
-        [Route("/{personId : int}/{name : alpha}")]
-        public StatusCodeResult Create(int personId, string name)
-        {
-            (this.EntityService as IFamilyService).Create(personId, name);
-
-            return this.Ok();
-        }
-
-        [HttpPut]
-        [Route("/{id : int}/{name : alpha}")]
-        public StatusCodeResult Update(int id, string name)
-        {
-            (this.EntityService as IFamilyService).Update(id, name);
-
-            return this.Ok();
-        }
+        [Route("person/{id:int}")]
+        public IEnumerable<Family> GetByPersonId(int id) 
+            => this.familyRepository.GetFamiliesByPersonId(id);
     }
 }
