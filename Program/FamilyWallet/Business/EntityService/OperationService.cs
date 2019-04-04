@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Business.EntityService.Base;
 using Business.EntityService.Handler.Interface;
 using Business.EntityService.Interface;
@@ -47,14 +49,14 @@ namespace Business.EntityService
             this.UnitOfWork.SaveChanges();
         }        
 
-        public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, decimal balance, string description, DateTime? date)
+        public void CreateTransaction(int fromPersonId, int fromWalletId, int toPersonId, int toWalletId, decimal balance, string description, DateTime? date)
         {
             CheckArgument.CheckForNull(description, nameof(description));
 
-            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(frompersonId)
+            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(fromPersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
-            Person toPerson = this.UnitOfWork.PersonRepository.GetById(topersonId)
+            Person toPerson = this.UnitOfWork.PersonRepository.GetById(toPersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
             Wallet fromWallet = this.UnitOfWork.WalletRepository.GetById(fromWalletId)
@@ -63,10 +65,10 @@ namespace Business.EntityService
             Wallet toWallet = this.UnitOfWork.WalletRepository.GetById(toWalletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
 
-            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(frompersonId, fromWalletId)
+            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(fromPersonId, fromWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
-            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(topersonId, toWalletId)
+            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(toPersonId, toWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory fromOperationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(OperationType.Spending, typeof(Transaction).Name);
