@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.EntityService.Base.Interface;
+using Business.Static;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity.Base;
 using Domain.Repository.Base;
@@ -14,8 +15,8 @@ namespace Business.EntityService.Base
 
         public EntityServiceBase(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork 
-                ?? throw new ArgumentNullException(nameof(unitOfWork));
+            CheckArgument.CheckForNull(unitOfWork, nameof(unitOfWork));
+            this.unitOfWork = unitOfWork;
         }
 
         public ICollection<TEntity> GetAll() => this.GetRepository().GetAll();

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Business.EntityService.Base;
 using Business.EntityService.Handler.Interface;
 using Business.EntityService.Interface;
@@ -13,7 +15,7 @@ namespace Business.EntityService
 {
     public class OperationService : EntityServiceBase<Operation>, IOperationService
     {
-        private IBalanceCounter balanceCounter;
+        private readonly IBalanceCalculator balanceCalculator;
 
         public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
         {
@@ -36,7 +38,7 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(operationCategory);
             }
 
-            wallet.Balance = balanceCounter.CountNewWalletBalance(wallet.Balance, balance, operationType);
+            wallet.Balance = balanceCalculator.CountNewWalletBalance(wallet.Balance, balance, operationType);
             this.UnitOfWork.WalletRepository.Update(wallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
@@ -47,14 +49,14 @@ namespace Business.EntityService
             this.UnitOfWork.SaveChanges();
         }        
 
-        public void CreateTransaction(int frompersonId, int fromWalletId, int topersonId, int toWalletId, decimal balance, string description, DateTime? date)
+        public void CreateTransaction(int fromPersonId, int fromWalletId, int toPersonId, int toWalletId, decimal balance, string description, DateTime? date)
         {
             CheckArgument.CheckForNull(description, nameof(description));
 
-            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(frompersonId)
+            Person fromPerson = this.UnitOfWork.PersonRepository.GetById(fromPersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
-            Person toPerson = this.UnitOfWork.PersonRepository.GetById(topersonId)
+            Person toPerson = this.UnitOfWork.PersonRepository.GetById(toPersonId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);
 
             Wallet fromWallet = this.UnitOfWork.WalletRepository.GetById(fromWalletId)
@@ -63,10 +65,10 @@ namespace Business.EntityService
             Wallet toWallet = this.UnitOfWork.WalletRepository.GetById(toWalletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
 
-            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(frompersonId, fromWalletId)
+            PersonWallet fromPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(fromPersonId, fromWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
-            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(topersonId, toWalletId)
+            PersonWallet toPersonWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(toPersonId, toWalletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
             OperationCategory fromOperationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(OperationType.Spending, typeof(Transaction).Name);
@@ -83,10 +85,10 @@ namespace Business.EntityService
                 this.UnitOfWork.OperationCategoryRepository.Add(toOperationCategory);
             }
 
-            fromWallet.Balance = balanceCounter.CountNewWalletBalance(fromWallet.Balance, balance, fromOperationCategory.Type);
+            fromWallet.Balance = balanceCalculator.CountNewWalletBalance(fromWallet.Balance, balance, fromOperationCategory.Type);
             this.UnitOfWork.WalletRepository.Update(fromWallet);
 
-            toWallet.Balance = balanceCounter.CountNewWalletBalance(toWallet.Balance, balance, toOperationCategory.Type);
+            toWallet.Balance = balanceCalculator.CountNewWalletBalance(toWallet.Balance, balance, toOperationCategory.Type);
             this.UnitOfWork.WalletRepository.Update(toWallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };
@@ -106,10 +108,11 @@ namespace Business.EntityService
         protected override IEntityRepository<Operation> GetRepository()
             => this.UnitOfWork.OperationRepository;
 
-        public OperationService(IUnitOfWork unitOfWork, IBalanceCounter balanceCounter) 
+        public OperationService(IUnitOfWork unitOfWork, IBalanceCalculator balanceCalculator) 
             : base(unitOfWork)
         {
-            this.balanceCounter = balanceCounter;
+            CheckArgument.CheckForNull(balanceCalculator, nameof(balanceCalculator));
+            this.balanceCalculator = balanceCalculator;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Business.EntityService
     {
         public void AddUserToWallet(int id, int personId, int familyId, AccessModifier accessModifier)
         {
-            Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id)
+            Wallet wallet = this.GetRepository().GetById(id)
                 ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
 
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
@@ -52,7 +52,7 @@ namespace Business.EntityService
         {
             CheckArgument.CheckForNull(name, nameof(name));
 
-            Wallet wallet = this.UnitOfWork.WalletRepository.GetById(id) 
+            Wallet wallet = this.GetRepository().GetById(id) 
                 ?? throw new InvalidPrimaryKeyException(typeof(Wallet).Name);
 
             wallet.Name = name;

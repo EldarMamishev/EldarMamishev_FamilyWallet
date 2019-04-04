@@ -38,8 +38,7 @@ namespace Data.EF.UnitOfWork
         public IPersonWalletRepository PersonWalletRepository => this.personWalletRepository
             ?? (this.personWalletRepository = new PersonWalletRepository(this.dbContext));
 
-        public void SaveChanges()
-            => this.dbContext.SaveChanges();
+        public void SaveChanges() => this.dbContext.SaveChanges();
 
         public ITransactionRepository TransactionRepository => this.transactionRepository
             ?? (this.transactionRepository = new TransactionRepository(this.dbContext));
