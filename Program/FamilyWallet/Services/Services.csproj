@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Authentification\Entity\" />
     <Folder Include="Authentification\Repository\" />
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
