@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.EntityService;
 using Business.EntityService.Base.Interface;
+using Business.EntityService.Interface;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace Services.Controllers.FamilyWallet
             => this.UnitOfWork.FamilyRepository.GetAll();
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("/{id : int}")]
         public Family Get(int id)
             => this.UnitOfWork.FamilyRepository.GetById(id);
 
@@ -32,10 +34,21 @@ namespace Services.Controllers.FamilyWallet
             => this.UnitOfWork.FamilyRepository.GetFamiliesByPersonId(id);
 
         [HttpPost]
-        [Route("")]
-        public StatusCodeResult Create()
+        [Route("/{personId : int}/{name : alpha}")]
+        public StatusCodeResult Create(int personId, string name)
         {
+            (this.EntityService as IFamilyService).Create(personId, name);
 
+            return this.Ok();
+        }
+
+        [HttpPut]
+        [Route("/{id : int}/{name : alpha}")]
+        public StatusCodeResult Update(int id, string name)
+        {
+            (this.EntityService as IFamilyService).Update(id, name);
+
+            return this.Ok();
         }
     }
 }
