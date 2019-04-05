@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Authentification\Repository\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
