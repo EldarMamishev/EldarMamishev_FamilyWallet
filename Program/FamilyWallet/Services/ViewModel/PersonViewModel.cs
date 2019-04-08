@@ -10,7 +10,6 @@ namespace Services.ViewModel
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public SocialViewModel SocialViewModel { get; set; }
         public IEnumerable<PersonWalletViewModel> PersonWallets { get; set; }
         public IEnumerable<FamilyViewModel> Families { get; set; }
     }

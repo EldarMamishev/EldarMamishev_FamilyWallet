@@ -7,6 +7,6 @@ namespace Services.ViewModel.Base
 {
     public abstract class EntityViewModelBase
     {
-         public int Id { get; set; }
+         public int ID { get; set; }
     }
 }
