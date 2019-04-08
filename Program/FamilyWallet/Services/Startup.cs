@@ -23,6 +23,7 @@ namespace Services
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper();
+            services.AddCors();
             //services.AddScoped<DbContext, FamilyWalletContext>();
 
             services.AddDbContext<FamilyWalletContext>(optionBuilder
