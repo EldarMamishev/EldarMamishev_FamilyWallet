@@ -23,7 +23,7 @@ namespace Services
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
-
+            services.AddTransient<DbContext, FamilyWalletContext>();
             ConfigureEntities(services);
             ConfigureServices(services);
         }
