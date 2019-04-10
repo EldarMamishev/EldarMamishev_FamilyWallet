@@ -43,7 +43,10 @@ namespace Services
                 app.UseHsts();
             }
 
-            app.UseCors();
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             app.UseHttpsRedirection();
             app.UseMvc();
         }
