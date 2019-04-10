@@ -22,5 +22,9 @@ export class FamilyService {
     return this.http.get<Family>( this.root + id );
   }
 
+  update(family : Family) : Observable<Family> {
+    return this.http.put<Family>(this.root, family);
+  }
+
   
 }
