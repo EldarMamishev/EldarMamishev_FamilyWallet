@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Family } from '../entities/family';
+import { Family } from '../view-models/family';
 import { DefaultConstants } from '../constants/default-constants';
+import { RequestPersonIdFamilyName } from '../view-models/request-person-id-family-name';
+import { PersonFamily } from '../view-models/person-family';
+import { pseudoRandomBytes } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +27,13 @@ export class FamilyService {
 
   update(family : Family) : Observable<Family> {
     return this.http.put<Family>(this.root, family);
+  }
+
+  createFamilyByPerson(personFamily : RequestPersonIdFamilyName) : Observable<Family> {
+    return this.http.post<Family>(this.root, personFamily);
+  }
+
+  addPersonToFamily(personFamily : PersonFamily) : Observable<Family>{
+    return this.http.post<Family>(this.root, personFamily);
   }
 }
