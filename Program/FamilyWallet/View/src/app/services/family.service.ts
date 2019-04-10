@@ -25,6 +25,4 @@ export class FamilyService {
   update(family : Family) : Observable<Family> {
     return this.http.put<Family>(this.root, family);
   }
-
-  
 }
