@@ -15,5 +15,6 @@ namespace Domain.Repository
         ICollection<Operation> GetOperationsByPersonId(int personId);
         ICollection<Operation> GetOperationsByTransactionId(int transactionId);
         ICollection<Operation> GetOperationsByWalletId(int walletId);
+        ICollection<Operation> GetOperationsByPersonAndWalletId(int personId, int walletId);
     }
 }

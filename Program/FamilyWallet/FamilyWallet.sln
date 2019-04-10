@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{4F2971C1-2138-4E08-A445-0808E4AA065E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{4F2971C1-2138-4E08-A445-0808E4AA065E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A3BB472D-234B-40AB-BCD7-17BE40838463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{A3BB472D-234B-40AB-BCD7-17BE40838463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{F269E270-F99F-49EF-91DC-86F1C7AD6BF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{F269E270-F99F-49EF-91DC-86F1C7AD6BF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{4F374A2C-A58E-4AEA-AE97-1E21246F9213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{4F374A2C-A58E-4AEA-AE97-1E21246F9213}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3E5B4EF3-C5B9-41A6-9346-6444E8288C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.UnitTest", "Tests\Business.UnitTest\Business.UnitTest.csproj", "{A97E54C2-B305-4A98-AF15-247C1614BA35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.UnitTest", "Tests\Business.UnitTest\Business.UnitTest.csproj", "{A97E54C2-B305-4A98-AF15-247C1614BA35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
