@@ -6,6 +6,7 @@ using AutoMapper;
 using Business.EntityService;
 using Business.EntityService.Base.Interface;
 using Business.EntityService.Interface;
+using Business.Static;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository;
@@ -23,6 +24,10 @@ namespace Services.Controllers.FamilyWallet
 
         public FamilyController(IFamilyService familyService, IFamilyRepository familyRepository, IMapper mapper)
         {
+            CheckArgument.CheckForNull(familyService, nameof(familyService));
+            CheckArgument.CheckForNull(familyRepository, nameof(familyRepository));
+            CheckArgument.CheckForNull(mapper, nameof(mapper));
+
             this.familyService = familyService;
             this.familyRepository = familyRepository;
             this.mapper = mapper;

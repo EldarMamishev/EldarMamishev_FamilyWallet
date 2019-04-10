@@ -27,7 +27,5 @@ namespace Business.EntityService
 
         public OperationCategoryService(IUnitOfWork unitOfWork) : base(unitOfWork)
         { }
-
-
     }
 }

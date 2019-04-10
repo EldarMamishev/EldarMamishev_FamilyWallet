@@ -39,6 +39,5 @@ namespace Services.Controllers.FamilyWallet
         [Route("family/{id:int}")]
         public IEnumerable<Wallet> GetByFamilyId(int id)
             => this.walletRepository.GetWalletsByFamilyId(id);
-
     }
 }
