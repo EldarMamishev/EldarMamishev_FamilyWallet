@@ -17,10 +17,9 @@ namespace Business.EntityService
     {
         private readonly IBalanceCalculator balanceCalculator;
 
-        public void CreateOneWalletOperation(int personId, int walletId, decimal balance, string description, string operationName, OperationType operationType, DateTime? date)
+        public void CreateOneWalletOperation(int personId, int walletId, int operationCategoryId, decimal balance, string description, DateTime? date)
         {
             CheckArgument.CheckForNull(description, nameof(description));
-            CheckArgument.CheckForNull(operationName, nameof(operationName));
 
             Person person = this.UnitOfWork.PersonRepository.GetById(personId)
                 ?? throw new InvalidForeignKeyException(typeof(Person).Name);             
@@ -28,17 +27,13 @@ namespace Business.EntityService
             Wallet wallet = this.UnitOfWork.WalletRepository.GetById(walletId)
                 ?? throw new InvalidForeignKeyException(typeof(Wallet).Name);
 
+            OperationCategory operationCategory = this.UnitOfWork.OperationCategoryRepository.GetById(operationCategoryId)
+                ?? throw new InvalidForeignKeyException(typeof(OperationCategory).Name);
+
             PersonWallet personWallet = this.UnitOfWork.PersonWalletRepository.GetPersonWalletByPersonAndWallet(personId, walletId)
                 ?? throw new InvalidPropertyException(typeof(PersonWallet).Name);
 
-            OperationCategory operationCategory = this.UnitOfWork.OperationCategoryRepository.GetOperationCategoryByTypeAndName(operationType, operationName);
-            if (operationCategory == null)
-            {
-                operationCategory = new OperationCategory() { Type = operationType, Name = operationName };
-                this.UnitOfWork.OperationCategoryRepository.Add(operationCategory);
-            }
-
-            wallet.Balance = balanceCalculator.CountNewWalletBalance(wallet.Balance, balance, operationType);
+            wallet.Balance = balanceCalculator.CountNewWalletBalance(wallet.Balance, balance, operationCategory.Type);
             this.UnitOfWork.WalletRepository.Update(wallet);
 
             OperationInfo operationInfo = new OperationInfo() { Balance = balance, Description = description, Date = date ?? DateTime.Now };

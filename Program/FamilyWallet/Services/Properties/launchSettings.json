@@ -20,7 +20,7 @@
     "Services": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/family",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

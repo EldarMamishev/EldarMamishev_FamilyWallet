@@ -26,6 +26,9 @@ namespace Data.EF.Repository
         public ICollection<Operation> GetOperationsByOperationType(OperationType operationType)
             => this.dbContext.Set<Operation>().Where(o => o.OperationCategory.Type == operationType).ToList();
 
+        public ICollection<Operation> GetOperationsByPersonAndWalletId(int personId, int walletId)
+            => this.dbContext.Set<Operation>().Where(o => o.PersonWallet.PersonID == personId && o.PersonWallet.WalletID == walletId).ToList();
+
         public ICollection<Operation> GetOperationsByPersonId(int personId)
             => this.dbContext.Set<Operation>().Where(o => o.PersonWallet.PersonID.Value == personId).ToList();
 
