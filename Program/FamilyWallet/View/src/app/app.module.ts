@@ -10,6 +10,7 @@ import { FamilyWithPeopleComponent } from './components/family-components/family
 import { AddPersonToFamilyComponent } from './components/family-components/add-person-to-family/add-person-to-family.component';
 import { UpdateFamilyComponent } from './components/family-components/update-family/update-family.component';
 import { CreateFamilyComponent } from './components/family-components/create-family/create-family.component';
+import { FamiliesByPersonComponent } from './components/family-components/families-by-person/families-by-person.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateFamilyComponent } from './components/family-components/create-fam
     FamilyWithPeopleComponent,
     AddPersonToFamilyComponent,
     UpdateFamilyComponent,
-    CreateFamilyComponent
+    CreateFamilyComponent,
+    FamiliesByPersonComponent
   ],
   imports: [
     BrowserModule,
