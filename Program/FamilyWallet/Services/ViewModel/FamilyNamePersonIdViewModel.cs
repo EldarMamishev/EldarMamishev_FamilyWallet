@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Services.ViewModel
 {
-    public class PersonFamilyViewModel
+    public class FamilyNamePersonIdViewModel
     {
         public int PersonID { get; set; }
-        public int FamilyID { get; set; }
+        public string FamilyName { get; set; }
     }
 }

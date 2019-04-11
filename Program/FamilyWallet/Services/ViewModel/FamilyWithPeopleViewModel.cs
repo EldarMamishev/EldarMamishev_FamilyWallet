@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Services.ViewModel
 {
-    public class PersonViewModel
+    public class FamilyWithPeopleViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public IEnumerable<PersonViewModel> People { get; set; }
     }
 }
