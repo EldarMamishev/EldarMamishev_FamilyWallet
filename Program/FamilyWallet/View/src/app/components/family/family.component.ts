@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilyService } from 'src/app/services/family.service';
+import { Observable } from 'rxjs';
+import { Family } from 'src/app/view-models/family';
 
 @Component({
   selector: 'app-family',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FamilyComponent implements OnInit {
 
-  constructor() { }
+  families : Family[];
+
+  constructor(private familyService : FamilyService) { }
 
   ngOnInit() {
   }
 
+  getAll() : void {
+    this.familyService.getFamilies().subscribe(families => this.families = families);
+  }
 }
