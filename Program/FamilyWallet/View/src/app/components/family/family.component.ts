@@ -9,15 +9,8 @@ import { Family } from 'src/app/view-models/family';
   styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit {
-
-  families : Family[];
-
-  constructor(private familyService : FamilyService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  getAll() : void {
-    this.familyService.getFamilies().subscribe(families => this.families = families);
   }
 }
