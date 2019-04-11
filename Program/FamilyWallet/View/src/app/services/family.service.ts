@@ -6,6 +6,7 @@ import { DefaultConstants } from '../constants/default-constants';
 import { RequestPersonIdFamilyName } from '../view-models/request-person-id-family-name';
 import { PersonFamily } from '../view-models/person-family';
 import { pseudoRandomBytes } from 'crypto';
+import { FamilyWithPeople } from '../view-models/family-with-people';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,15 @@ export class FamilyService {
   ) { }
 
   getFamilies() : Observable<Family[]> {
-    return this.http.get<Family[]>( this.root );
+    return this.http.get<Family[]>(this.root);
   }
 
-  getFamilyById(id : number) : Observable<Family> {
-    return this.http.get<Family>( this.root + id );
+  getFamilyById(id : number) : Observable<FamilyWithPeople> {
+    return this.http.get<FamilyWithPeople>(this.root + id);
+  }
+
+  getFamiliesByPersonId(id : number) : Observable<Family[]> {
+    return this.http.get<Family[]>(this.root + '/person' + id);
   }
 
   update(family : Family) : Observable<Family> {
