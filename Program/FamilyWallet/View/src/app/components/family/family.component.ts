@@ -9,8 +9,10 @@ import { Family } from 'src/app/view-models/family';
   styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit {
+  
   constructor() { }
 
   ngOnInit() {
   }
 }
+ 

@@ -8,6 +8,7 @@ import { FamilyService } from 'src/app/services/family.service';
   styleUrls: ['./families-by-person.component.css']
 })
 export class FamiliesByPersonComponent implements OnInit {    
+  
   families : Family[];
 
   constructor(private familyService : FamilyService) { }
