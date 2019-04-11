@@ -40,18 +40,18 @@ namespace Services.Controllers.FamilyWallet
 
         [HttpGet]
         [Route("{id:int}")]
-        public FamilyViewModel Get(int id) => this.mapper.Map<Family, FamilyViewModel>(this.familyRepository.GetById(id));
+        public FamilyWithPeopleViewModel Get(int id) => this.mapper.Map<Family, FamilyWithPeopleViewModel>(this.familyRepository.GetById(id));
 
         [HttpGet]
         [Route("person/{id:int}")]
-        public IEnumerable<FamilyViewModel> GetByPersonId(int id) => this.familyRepository.GetFamiliesByPersonId(id)
-            .Select(f => this.mapper.Map<Family, FamilyViewModel>(f));
+        public IEnumerable<FamilyWithPeopleViewModel> GetByPersonId(int id) => this.familyRepository.GetFamiliesByPersonId(id)
+            .Select(f => this.mapper.Map<Family, FamilyWithPeopleViewModel>(f));
 
         [HttpPost]
         [Route("")]
-        public ActionResult Create([FromBody] PersonFamilyViewModel personFamily)
+        public ActionResult Create([FromBody] FamilyNamePersonIdViewModel personFamily)
         {
-            this.familyService.Create(personFamily.Person.ID, personFamily.Family.Name);
+            this.familyService.Create(personFamily.PersonID, personFamily.FamilyName);
 
             return this.Ok();
         }
@@ -60,7 +60,7 @@ namespace Services.Controllers.FamilyWallet
         [Route("person")]
         public ActionResult AddPersonToFamily([FromBody] PersonFamilyViewModel personFamily)
         {
-            this.familyService.AddPersonToFamily(personFamily.Family.ID, personFamily.Person.ID);
+            this.familyService.AddPersonToFamily(personFamily.FamilyID, personFamily.PersonID);
 
             return this.Ok();
         }
