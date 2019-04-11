@@ -1,4 +1,4 @@
 export class PersonFamily {
-    PersonId : number;
-    FamilyId : number;
+    PersonID : number;
+    FamilyID : number;
 }

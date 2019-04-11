@@ -1,4 +1,4 @@
 export class RequestPersonIdFamilyName {
-    PersonId : number;
+    PersonID : number;
     FamilyName : string;
 }
