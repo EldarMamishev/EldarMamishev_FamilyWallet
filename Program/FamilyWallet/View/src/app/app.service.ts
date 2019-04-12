@@ -6,7 +6,11 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
-
-  constructor() { }
   
+  constructor() { }
+
+  getUser() : Observable<User> {
+    return of(JSON.parse(localStorage.getItem('currentUser')));
+  }
+
 }
