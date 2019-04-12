@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Family } from '../view-models/family';
+import { Family } from '../entities/family';
 import { DefaultConstants } from '../constants/default-constants';
 import { RequestPersonIdFamilyName } from '../view-models/request-person-id-family-name';
 import { PersonFamily } from '../view-models/person-family';

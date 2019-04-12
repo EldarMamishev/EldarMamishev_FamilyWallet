@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { Observable } from 'rxjs';
-import { Family } from 'src/app/view-models/family';
+import { Family } from 'src/app/entities/family';
 
 @Component({
   selector: 'app-family',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Family } from 'src/app/view-models/family';
+import { Family } from 'src/app/entities/family';
 import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
