@@ -10,7 +10,7 @@ namespace Services.ViewModel
     public class PersonWalletViewModel : EntityViewModelBase
     {
         public PersonViewModel Person { get; set; }
-        public FamilyViewModel Family { get; set; }
+        public FamilyWithPeopleViewModel Family { get; set; }
         public AccessModifier AccessModifier { get; set; }
     }
 }
