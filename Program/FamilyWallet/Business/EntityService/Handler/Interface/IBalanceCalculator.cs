@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain.Entity;
-using Domain.Enum;
+﻿using Domain.Enum;
 
 namespace Business.EntityService.Handler.Interface
 {

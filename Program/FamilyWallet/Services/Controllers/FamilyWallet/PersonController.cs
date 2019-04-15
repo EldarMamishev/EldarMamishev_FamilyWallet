@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Business.EntityService.Interface;
 using Business.Static;
 using Domain.Repository;
-using Services.Authentification.Enum;
-using Services.ViewModel;
 
 namespace Services.Controllers.FamilyWallet
 {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Business.EntityService;
+﻿using Business.EntityService;
 using Business.EntityService.Handler;
 using Business.EntityService.Handler.Interface;
 using Business.EntityService.Interface;
 using Data.EF;
 using Data.EF.Repository;
-using Data.EF.Repository.Base;
 using Data.EF.UnitOfWork;
 using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;

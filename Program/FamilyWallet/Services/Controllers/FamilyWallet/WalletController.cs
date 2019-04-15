@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Business.EntityService.Interface;
 using Domain.Entity;
-using Domain.Enum;
 using Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 
