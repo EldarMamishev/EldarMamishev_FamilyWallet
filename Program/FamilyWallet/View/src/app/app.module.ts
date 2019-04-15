@@ -10,17 +10,14 @@ import { AddPersonToFamilyComponent } from './family/add-person-to-family/add-pe
 import { UpdateFamilyComponent } from './family/update-family/update-family.component';
 import { CreateFamilyComponent } from './family/create-family/create-family.component';
 import { FamiliesByPersonComponent } from './family/families-by-person/families-by-person.component';
+import { FamilyModule } from './family/family.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FamilyWithPeopleComponent,
-    AddPersonToFamilyComponent,
-    UpdateFamilyComponent,
-    CreateFamilyComponent,
-    FamiliesByPersonComponent
+    AppComponent
   ],
   imports: [
+    FamilyModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
