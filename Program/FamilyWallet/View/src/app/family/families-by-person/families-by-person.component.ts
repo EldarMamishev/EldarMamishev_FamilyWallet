@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Family } from 'src/app/entities/family';
-import { FamilyService } from 'src/app/services/family.service';
+import { FamilyService } from 'src/app/family/family.service';
 
 @Component({
   selector: 'app-families-by-person',
