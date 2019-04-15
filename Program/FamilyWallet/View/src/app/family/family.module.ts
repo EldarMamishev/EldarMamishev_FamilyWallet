@@ -8,15 +8,16 @@ import { CreateFamilyComponent } from './create-family/create-family.component';
 import { FamiliesByPersonComponent } from './families-by-person/families-by-person.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    FamilyRoutingModule,
+  declarations: [
     FamilyWithPeopleComponent,
     AddPersonToFamilyComponent,
     UpdateFamilyComponent,
     CreateFamilyComponent,
     FamiliesByPersonComponent
+  ],
+  imports: [
+    FamilyRoutingModule,
+    CommonModule
   ]
 })
 export class FamilyModule { }
