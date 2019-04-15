@@ -4,9 +4,9 @@ import { DefaultConstants } from '../constants/default-constants';
 import { FamiliesByPersonComponent } from './families-by-person/families-by-person.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'person', pathMatch: 'full' },
+  { path: '', redirectTo: 'family/person', pathMatch: 'full' },
 
-  { path: 'person', component: FamiliesByPersonComponent}
+  { path: 'family/person', component: FamiliesByPersonComponent}
 ];
 
 @NgModule({
