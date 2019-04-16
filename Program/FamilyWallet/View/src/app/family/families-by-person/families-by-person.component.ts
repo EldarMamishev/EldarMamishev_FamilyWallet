@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Family } from 'src/app/entities/family';
 import { FamilyService } from 'src/app/family/family.service';
+import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
 
 @Component({
   selector: 'app-families-by-person',
@@ -14,6 +15,7 @@ export class FamiliesByPersonComponent implements OnInit {
   constructor(private familyService : FamilyService) { }
 
   ngOnInit() {
+    this.getAll();
   }  
 
   getAll() : void {
