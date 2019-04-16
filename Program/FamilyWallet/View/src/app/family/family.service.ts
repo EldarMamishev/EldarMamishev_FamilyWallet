@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../entities/family';
-import { DefaultConstants } from '../constants/default-constants';
+import { CONNECTION_PATH } from '../constants/default-constants';
 import { RequestPersonIdFamilyName } from '../view-models/request-person-id-family-name';
 import { PersonFamily } from '../view-models/person-family';
 import { FamilyWithPeople } from '../view-models/family-with-people';
@@ -11,7 +11,7 @@ import { FamilyWithPeople } from '../view-models/family-with-people';
   providedIn: 'root'
 })
 export class FamilyService {  
-  private root = DefaultConstants.CONNECTION_PATH + '/family';
+  private root = CONNECTION_PATH + '/family';
 
   constructor( 
     private http: HttpClient
@@ -26,7 +26,7 @@ export class FamilyService {
   }
 
   getFamiliesByPersonId(id : number) : Observable<Family[]> {
-    return this.http.get<Family[]>(this.root + '/person' + id);
+    return this.http.get<Family[]>(this.root + '/person/' + id);
   }
 
   update(family : Family) : Observable<Family> {

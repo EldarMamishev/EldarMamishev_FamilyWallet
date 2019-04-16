@@ -6,6 +6,7 @@ import { AddPersonToFamilyComponent } from './add-person-to-family/add-person-to
 import { UpdateFamilyComponent } from './update-family/update-family.component';
 import { CreateFamilyComponent } from './create-family/create-family.component';
 import { FamiliesByPersonComponent } from './families-by-person/families-by-person.component';
+import { AllFamiliesComponent } from './all-families/all-families.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { FamiliesByPersonComponent } from './families-by-person/families-by-pers
     AddPersonToFamilyComponent,
     UpdateFamilyComponent,
     CreateFamilyComponent,
-    FamiliesByPersonComponent
+    FamiliesByPersonComponent,
+    AllFamiliesComponent
   ],
   imports: [
     FamilyRoutingModule,
