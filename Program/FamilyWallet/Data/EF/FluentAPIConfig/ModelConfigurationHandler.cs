@@ -16,6 +16,7 @@ namespace Data.EF.FluentAPIConfig
             modelBuilder.ApplyConfiguration(new OperationInfoConfiguration());
             modelBuilder.ApplyConfiguration(new OperationCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
         }
     }
 }
