@@ -5,9 +5,10 @@ import { FamiliesByPersonComponent } from './families-by-person/families-by-pers
 import { AllFamiliesComponent } from './all-families/all-families.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'family/person', pathMatch: 'full' },
+  { path: '', redirectTo: 'family/', pathMatch: 'full' },
 
-  { path: 'family/person', component: AllFamiliesComponent}
+  { path: 'family/', component: AllFamiliesComponent},
+  { path: 'family/person', component: FamiliesByPersonComponent }
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { FamilyWithPeople } from '../view-models/family-with-people';
   providedIn: 'root'
 })
 export class FamilyService {  
-  private root = CONNECTION_PATH + '/family';
+  private root = CONNECTION_PATH + '/family/';
 
   constructor( 
     private http: HttpClient
@@ -25,8 +25,8 @@ export class FamilyService {
     return this.http.get<FamilyWithPeople>(this.root + id);
   }
 
-  getFamiliesByPersonId(id : number) : Observable<Family[]> {
-    return this.http.get<Family[]>(this.root + '/person/' + id);
+  getFamiliesByPersonId(id : number) : Observable<FamilyWithPeople[]> {
+    return this.http.get<FamilyWithPeople[]>(this.root + '/person/' + id);
   }
 
   update(family : Family) : Observable<Family> {

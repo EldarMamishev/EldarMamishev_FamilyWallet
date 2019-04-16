@@ -4,7 +4,7 @@ import { FamiliesByPersonComponent } from './family/families-by-person/families-
 import { FamilyModule } from './family/family.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'family', pathMatch: 'full' },
+  { path: '', redirectTo: 'family/', pathMatch: 'full' },
  
   { path: 'family', loadChildren: () => FamilyModule }
 ];

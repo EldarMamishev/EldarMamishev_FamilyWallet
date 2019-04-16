@@ -1,5 +1,14 @@
-<ul>
-  <li *ngFor="let family of families">    
+<ul class="families">
+  <li *ngFor="let family of families" (click)="getFamilyById(family.id)" [class.selected]="hero === selectedFamily">    
     <span>{{family.id}}</span> {{family.name}}
+    <ul>
+      <li *ngFor="let person of family.people">
+        <span>{{person.name}}</span> {{person.surname}}
+      </li>
+    </ul>
   </li>
 </ul>
+
+<div *ngIf="selectedFamily">
+  <h2>{{selectedFamily.id}} {{selectedFamily.name}}</h2>
+</div>
