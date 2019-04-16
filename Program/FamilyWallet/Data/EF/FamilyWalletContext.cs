@@ -19,10 +19,10 @@ namespace Data.EF
 
         private void Initialize()
         {
-            Person person = new Person() { Name = "Bob", Surname = "Smith" };
+            var person = new Person() { Name = "Bob", Surname = "Smith" };
             this.People.Add(person);
 
-            List<Family> families = new List<Family>()
+            var families = new List<Family>()
             {
                 new Family() { Name = "Parents" },
                 new Family() { Name = "Pair" },
@@ -30,11 +30,11 @@ namespace Data.EF
             };
             families.ForEach(f => this.Families.Add(f));
 
-            List<PersonFamily> personFamilies = new List<PersonFamily>()
+            var personFamilies = new List<PersonFamily>()
             {
-                new PersonFamily{ PersonID = person.ID, FamilyID = families[0].ID},
-                new PersonFamily{ PersonID = person.ID, FamilyID = families[1].ID},
-                new PersonFamily{ PersonID = person.ID, FamilyID = families[2].ID}
+                new PersonFamily() { PersonID = person.ID, FamilyID = families[0].ID},
+                new PersonFamily() { PersonID = person.ID, FamilyID = families[1].ID},
+                new PersonFamily() { PersonID = person.ID, FamilyID = families[2].ID}
             };
             personFamilies.ForEach(pf => this.PersonFamilies.Add(pf));
 
