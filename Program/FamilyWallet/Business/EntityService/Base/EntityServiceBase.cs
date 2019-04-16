@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Business.EntityService.Base.Interface;
 using Business.Static;
 using Data.EF.UnitOfWork.Interface;

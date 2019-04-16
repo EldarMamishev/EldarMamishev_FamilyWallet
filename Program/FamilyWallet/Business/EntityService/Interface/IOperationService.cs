@@ -1,7 +1,6 @@
 ﻿using System;
 using Business.EntityService.Base.Interface;
 using Domain.Entity;
-using Domain.Enum;
 
 namespace Business.EntityService.Interface
 {
