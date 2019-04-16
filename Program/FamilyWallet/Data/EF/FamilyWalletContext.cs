@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Data.EF.FluentAPIConfig;
-using Data.EF.FluentAPIConfig.Initialize;
 using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,19 +8,13 @@ namespace Data.EF
     public class FamilyWalletContext : DbContext
     {
         public FamilyWalletContext(DbContextOptions options) : base(options)
-        {
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             new ModelConfigurationHandler().SetConfigurations(modelBuilder);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
         }
 
         private void Initialize()
