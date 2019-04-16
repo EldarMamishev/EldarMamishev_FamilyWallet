@@ -3,8 +3,8 @@ using System.Linq;
 using AutoMapper;
 using Business.EntityService.Interface;
 using Business.Static;
+using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
-using Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Services.ViewModel;
 
@@ -14,33 +14,47 @@ namespace Services.Controllers.FamilyWallet
     public class FamilyController : Controller
     {
         private readonly IFamilyService familyService;
-        private readonly IFamilyRepository familyRepository;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public FamilyController(IFamilyService familyService, IFamilyRepository familyRepository, IMapper mapper)
+        public FamilyController(IFamilyService familyService, IUnitOfWork unitOfWork, IMapper mapper)
         {
             CheckArgument.CheckForNull(familyService, nameof(familyService));
-            CheckArgument.CheckForNull(familyRepository, nameof(familyRepository));
+            CheckArgument.CheckForNull(unitOfWork, nameof(unitOfWork));
             CheckArgument.CheckForNull(mapper, nameof(mapper));
 
             this.familyService = familyService;
-            this.familyRepository = familyRepository;
+            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<FamilyViewModel> Get() => this.familyRepository.GetAll()
+        public IEnumerable<FamilyViewModel> Get() => this.unitOfWork.FamilyRepository.GetAll()
             .Select(f => this.mapper.Map<Family, FamilyViewModel>(f));
 
         [HttpGet]
         [Route("{id:int}")]
-        public FamilyWithPeopleViewModel Get(int id) => this.mapper.Map<Family, FamilyWithPeopleViewModel>(this.familyRepository.GetById(id));
+        public FamilyWithPeopleViewModel Get(int id)
+        {
+            Family family = this.unitOfWork.FamilyRepository.GetById(id);
+            IEnumerable<PersonViewModel> people = this.unitOfWork.PersonRepository.GetPeopleByFamilyId(id).Select(p => this.mapper.Map<Person, PersonViewModel>(p));
+
+            return new FamilyWithPeopleViewModel() { ID = family.ID, Name = family.Name, People = people };
+        }
 
         [HttpGet]
         [Route("person/{id:int}")]
-        public IEnumerable<FamilyWithPeopleViewModel> GetByPersonId(int id) => this.familyRepository.GetFamiliesByPersonId(id)
-            .Select(f => this.mapper.Map<Family, FamilyWithPeopleViewModel>(f));
+        public IEnumerable<FamilyWithPeopleViewModel> GetByPersonId(int id)
+        {
+            Person person = this.unitOfWork.PersonRepository.GetById(id);
+            IEnumerable<FamilyViewModel> families = this.unitOfWork.FamilyRepository.GetFamiliesByPersonId(id).Select(f => this.mapper.Map<Family, FamilyViewModel>(f));
+            IEnumerable<FamilyWithPeopleViewModel> familiesWithPeople = families
+                .Select(f => new FamilyWithPeopleViewModel() { ID = f.ID, Name = f.Name, People = this.unitOfWork.PersonRepository.GetPeopleByFamilyId(f.ID)
+                .Select(p => this.mapper.Map<Person, PersonViewModel>(p)) });
+
+            return familiesWithPeople;
+        }
 
         [HttpPost]
         [Route("")]

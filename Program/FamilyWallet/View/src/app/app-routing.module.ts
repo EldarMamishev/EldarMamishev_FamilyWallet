@@ -7,7 +7,7 @@ import { FamilyModule } from './family/family.module';
 const routes: Routes = [
   { path: '', redirectTo: 'family', pathMatch: 'full' },
  
-  { path: 'family', loadChildren: () => FamilyModule },    
+  { path: 'family', loadChildren: () => FamilyModule }
 ];
 
 @NgModule({
