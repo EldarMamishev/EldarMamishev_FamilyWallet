@@ -9,7 +9,7 @@ import { FamilyService } from 'src/app/family/family.service';
 })
 export class FamiliesByPersonComponent implements OnInit {    
   
-  families : Family[];
+  public families : Family[];
 
   constructor(private familyService : FamilyService) { }
 
