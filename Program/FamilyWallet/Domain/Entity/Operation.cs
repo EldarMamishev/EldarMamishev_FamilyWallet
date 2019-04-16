@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Domain.Entity.Base;
+﻿using Domain.Entity.Base;
 
 namespace Domain.Entity
 {

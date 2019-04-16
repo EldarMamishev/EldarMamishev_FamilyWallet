@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using Business.EntityService;
-using Business.EntityService.Base.Interface;
 using Business.EntityService.Interface;
 using Business.Static;
-using Data.EF.UnitOfWork.Interface;
 using Domain.Entity;
 using Domain.Repository;
 using Microsoft.AspNetCore.Mvc;

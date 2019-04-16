@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Business.EntityService.Base;
 using Business.EntityService.Handler.Interface;
 using Business.EntityService.Interface;
