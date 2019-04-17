@@ -11,7 +11,7 @@ import { FamilyWithPeople } from '../view-models/family-with-people';
   providedIn: 'root'
 })
 export class FamilyService {  
-  private root = CONNECTION_PATH + '/family/';
+  private root = CONNECTION_PATH + '/family';
 
   constructor( 
     private http: HttpClient

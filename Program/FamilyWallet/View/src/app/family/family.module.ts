@@ -6,6 +6,7 @@ import { UpdateFamilyComponent } from './update-family/update-family.component';
 import { CreateFamilyComponent } from './create-family/create-family.component';
 import { FamiliesByPersonComponent } from './families-by-person/families-by-person.component';
 import { AllFamiliesComponent } from './all-families/all-families.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AllFamiliesComponent } from './all-families/all-families.component';
   ],
   imports: [
     FamilyRoutingModule,
+    FormsModule,
     CommonModule
   ]
 })
