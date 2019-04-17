@@ -6,15 +6,15 @@ import { AllFamiliesComponent } from './all-families/all-families.component';
 import { CreateFamilyComponent } from './create-family/create-family.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'family/', pathMatch: 'full' },
+  { path: '', redirectTo: 'all', pathMatch: 'full' },
 
-  { path: 'family/', component: AllFamiliesComponent},
-  { path: 'family/person', component: FamiliesByPersonComponent },
-  { path: 'family/create', component: CreateFamilyComponent }
+  { path: 'all', component: AllFamiliesComponent},
+  { path: 'person', component: FamiliesByPersonComponent },
+  { path: 'create', component: CreateFamilyComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class FamilyRoutingModule { }

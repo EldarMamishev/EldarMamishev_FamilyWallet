@@ -7,34 +7,38 @@ import { RequestPersonIdFamilyName } from '../view-models/request-person-id-fami
 import { PersonFamily } from '../view-models/person-family';
 import { FamilyWithPeople } from '../view-models/family-with-people';
 
+const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) }; 
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class FamilyService {  
-  private root = CONNECTION_PATH + '/family';
+  private root = CONNECTION_PATH + '/family';  
 
   constructor( 
     private http: HttpClient
   ) { }
 
   getFamilies() : Observable<Family[]> {
-    return this.http.get<Family[]>(this.root);
+    return this.http.get<Family[]>(this.root, httpOptions);
   }
 
   getFamilyById(id : number) : Observable<FamilyWithPeople> {
-    return this.http.get<FamilyWithPeople>(this.root + id);
+    return this.http.get<FamilyWithPeople>(this.root + id, httpOptions);
   }
 
   getFamiliesByPersonId(id : number) : Observable<FamilyWithPeople[]> {
-    return this.http.get<FamilyWithPeople[]>(this.root + '/person/' + id);
+    return this.http.get<FamilyWithPeople[]>(this.root + '/person/' + id, httpOptions);
   }
 
   update(family : Family) : Observable<Family> {
     return this.http.put<Family>(this.root, family);
   }
 
-  createFamilyByPerson(personFamily : RequestPersonIdFamilyName) : Observable<Family> {
-    return this.http.post<Family>(this.root, personFamily);
+  createFamilyByPerson(personFamily : RequestPersonIdFamilyName) : Observable<any> {
+    console.log('1');
+    return this.http.post(this.root, personFamily, httpOptions);
   }
 
   addPersonToFamily(personFamily : PersonFamily) : Observable<Family>{

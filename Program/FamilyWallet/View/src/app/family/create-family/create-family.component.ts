@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyService } from '../family.service';
 import { RequestPersonIdFamilyName } from 'src/app/view-models/request-person-id-family-name';
 import { USER_ID } from 'src/app/constants/default-constants';
+import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
 
 @Component({
   selector: 'app-create-family',
@@ -10,7 +11,7 @@ import { USER_ID } from 'src/app/constants/default-constants';
 })
 export class CreateFamilyComponent implements OnInit {
 
-  public family : RequestPersonIdFamilyName = { FamilyName: '', PersonID: USER_ID };
+  public family : RequestPersonIdFamilyName = { FamilyName: "", PersonID: USER_ID };
 
   constructor(private familyService : FamilyService) { }
 
@@ -19,7 +20,9 @@ export class CreateFamilyComponent implements OnInit {
   
   createFamily() : void
   {
-    this.familyService.createFamilyByPerson(this.family);
+    var o = this.familyService.createFamilyByPerson(this.family).toPromise();
+    //o.toPromise().then(data => console.log(data));
+    //console.log('2');
   }
 
 }

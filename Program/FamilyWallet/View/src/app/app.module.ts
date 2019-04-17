@@ -14,7 +14,6 @@ import { FamilyModule } from './family/family.module';
   imports: [
     FamilyModule,
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

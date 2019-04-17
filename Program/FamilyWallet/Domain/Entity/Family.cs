@@ -13,9 +13,9 @@ namespace Domain.Entity
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            string pattern = @"[\s\w\p{P}]";
+            string pattern = @"^[\s\w\p{P}]+$";
 
-            if (Regex.IsMatch(this.Name, pattern))
+            if (!Regex.IsMatch(this.Name, pattern))
                 yield return new ValidationResult(nameof(this.Name));
 
             if (this.PersonFamilies == null || this.PersonFamilies.Count == 0)

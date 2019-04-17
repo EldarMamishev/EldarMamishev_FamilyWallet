@@ -62,7 +62,7 @@ namespace Services.Controllers.FamilyWallet
         {
             this.familyService.Create(personFamily.PersonID, personFamily.FamilyName);
 
-            return this.Ok();
+            return this.Ok(personFamily);
         }
 
         [HttpPost]
