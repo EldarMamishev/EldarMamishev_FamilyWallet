@@ -10,7 +10,7 @@ import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
   styleUrls: ['./create-family.component.css']
 })
 export class CreateFamilyComponent implements OnInit {
-
+  //TODO change from constant UserID to getCurrentUser()
   public family : RequestPersonIdFamilyName = { FamilyName: "", PersonID: USER_ID };
 
   constructor(private familyService : FamilyService) { }
@@ -20,9 +20,7 @@ export class CreateFamilyComponent implements OnInit {
   
   createFamily() : void
   {
-    var o = this.familyService.createFamilyByPerson(this.family).toPromise();
-    //o.toPromise().then(data => console.log(data));
-    //console.log('2');
+    this.familyService.createFamilyByPerson(this.family).toPromise();
   }
 
 }

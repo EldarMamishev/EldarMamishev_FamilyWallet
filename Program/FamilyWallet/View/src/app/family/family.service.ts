@@ -37,7 +37,6 @@ export class FamilyService {
   }
 
   createFamilyByPerson(personFamily : RequestPersonIdFamilyName) : Observable<any> {
-    console.log('1');
     return this.http.post(this.root, personFamily, httpOptions);
   }
 

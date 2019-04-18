@@ -9,7 +9,6 @@ import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
   styleUrls: ['./all-families.component.css']
 })
 export class AllFamiliesComponent implements OnInit {
-
   public families : Family[];
   
   constructor(private familyService : FamilyService) { }

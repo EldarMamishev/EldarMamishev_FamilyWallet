@@ -19,6 +19,7 @@ export class FamiliesByPersonComponent implements OnInit {
   constructor(private familyService : FamilyService) { }
 
   ngOnInit() {
+    //TODO change constant UserID to getCurrentUser()
     this.getByPersonId(USER_ID);
   }  
 
