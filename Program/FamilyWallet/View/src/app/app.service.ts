@@ -6,7 +6,9 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
-  
+
+  public static userId = 1;
+
   constructor() { }
 
   getUser() : Observable<User> {

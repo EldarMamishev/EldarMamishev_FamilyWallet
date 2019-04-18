@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DefaultConstants } from './constants/default-constants';
 import { FamiliesByPersonComponent } from './family/families-by-person/families-by-person.component';
 import { FamilyModule } from './family/family.module';
 

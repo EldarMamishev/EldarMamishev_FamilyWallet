@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Family } from 'src/app/entities/family';
 import { FamilyService } from 'src/app/family/family.service';
+import { AppService } from 'src/app/app.service';
 import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
+import { USER_ID } from 'src/app/constants/default-constants';
+import { FamilyWithPeople } from 'src/app/view-models/family-with-people';
 
 @Component({
   selector: 'app-families-by-person',
@@ -10,15 +13,22 @@ import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
 })
 export class FamiliesByPersonComponent implements OnInit {    
   
-  public families : Family[];
-
+  public families : FamilyWithPeople[];
+  public selectedFamily : FamilyWithPeople;
+  
   constructor(private familyService : FamilyService) { }
 
   ngOnInit() {
-    this.getAll();
+    //TODO change constant UserID to getCurrentUser()
+    this.getByPersonId(USER_ID);
   }  
 
-  getAll() : void {
-    this.familyService.getFamilies().subscribe(families => this.families = families);
+  getByPersonId(id: number) : void {
+    this.familyService.getFamiliesByPersonId(id).subscribe(families => this.families = families);
+  }
+
+  getFamilyById(id : number) : void
+  {
+    this.familyService.getFamilyById(id).subscribe(family => this.selectedFamily = family);
   }
 }
